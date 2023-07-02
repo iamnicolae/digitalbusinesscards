@@ -3,8 +3,10 @@ import Input from "./Input"
 
 import { db } from "../firebase/db"
 import { collection, addDoc } from "firebase/firestore"
+import validateForm from "../utils/validateForm"
 
 function Form() {
+  const [validation, setValidation] = useState({})
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -16,7 +18,9 @@ function Form() {
     street: "",
     city: "",
     country: "",
-    website: ""
+    website: "",
+    slug: "ae1234",
+    created_at: new Date()
   })
 
   const cardsCollectionRef = collection(db, "cards")
@@ -25,49 +29,143 @@ function Form() {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
+  const validate = (e) => {
+    const errors = validateForm(form)
+    console.log(errors)
+    console.log(e.target.name)
+    setValidation({ [e.target.name]: errors[e.target.name] })
+  }
+
   const submit = async (e) => {
     e.preventDefault();
 
-    await addDoc(cardsCollectionRef, { ...form })
+    const errors = validateForm(form)
+
+    if (!errors) {
+      await addDoc(cardsCollectionRef, { ...form })
+    } else {
+      setValidation({ ...errors })
+      return
+    }
+
+
 
   }
+
+
 
   return (
     <form onSubmit={submit}>
       <Input
         name="firstName"
         type="text"
-        required={true}
-        pattern="^[A-Za-z\s\-]+$"
-        placeholder="First Name"
+        label="First Name"
+        placeholder="e.g. Michael"
         value={form.firstName}
         onChange={change}
+        onBlur={validate}
+        validation={validation}
       />
       <Input
         name="lastName"
         type="text"
-        required={true}
-        pattern="^[A-Za-z\s\-]+$"
-        placeholder="Last Name"
+        label="Last Name"
+        placeholder="e.g. Anderson"
         value={form.lastName}
         onChange={change}
+        onBlur={validate}
+        validation={validation}
       />
       <Input
         name="mobile"
         type="tel"
-        required={true}
-        placeholder="Mobile"
+        label="Mobile"
+        placeholder="e.g. 07911 123456"
         value={form.mobile}
         onChange={change}
+        onBlur={validate}
+        validation={validation}
       />
-      <Input name="phone" type="tel" placeholder="Phone" value={form.phone} onChange={change} />
-      <Input name="email" type="text" placeholder="Email" value={form.email} onChange={change} />
-      <Input name="company" type="text" placeholder="Company" value={form.company} onChange={change} />
-      <Input name="position" type="text" placeholder="Position" value={form.position} onChange={change} />
-      <Input name="street" type="text" placeholder="Street" value={form.street} onChange={change} />
-      <Input name="city" type="text" placeholder="City" value={form.city} onChange={change} />
-      <Input name="country" type="text" placeholder="Country" value={form.country} onChange={change} />
-      <Input name="website" type="url" placeholder="Website" value={form.website} onChange={change} />
+      <Input
+        name="phone"
+        type="tel"
+        label="Phone"
+        placeholder="e.g. (000) 1234 4321"
+        value={form.phone}
+        onChange={change}
+        onBlur={validate}
+        validation={validation}
+      />
+      <Input
+        name="email"
+        type="text"
+        label="Email"
+        placeholder="e.g. michael@anderson.com"
+        value={form.email}
+        onChange={change}
+        onBlur={validate}
+        validation={validation}
+      />
+      <Input
+        name="company"
+        type="text"
+        label="Company"
+        placeholder="e.g. TheCompany"
+        value={form.company}
+        onChange={change}
+        onBlur={validate}
+        validation={validation}
+      />
+      <Input
+        name="position"
+        type="text"
+        label="Position"
+        placeholder="e.g. Technical Director"
+        value={form.position}
+        onChange={change}
+        onBlur={validate}
+        validation={validation}
+      />
+      <Input
+        name="street"
+        type="text"
+        label="Street"
+        placeholder="e.g. 199 Bourke Avenue"
+        value={form.street}
+        onChange={change}
+        onBlur={validate}
+        validation={validation}
+      />
+      <Input
+        name="city"
+        type="text"
+        label="City"
+        placeholder="e.g. Berlin"
+        value={form.city}
+        onChange={change}
+        onBlur={validate}
+        validation={validation}
+      />
+      <Input
+        name="country"
+        type="text"
+        label="Country"
+        placeholder="e.g. Spain"
+        value={form.country}
+        onChange={change}
+        onBlur={validate}
+        validation={validation}
+      />
+      <Input
+        name="website"
+        type="url"
+        label="Website"
+        placeholder="e.g. https://getqr.cc"
+        value={form.website}
+        onChange={change}
+        onBlur={validate}
+        validation={validation}
+      />
 
       <button type="submit">submit</button>
     </form>
