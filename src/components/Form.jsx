@@ -31,8 +31,6 @@ function Form() {
 
   const validate = (e) => {
     const errors = validateForm(form)
-    console.log(errors)
-    console.log(e.target.name)
     setValidation({ [e.target.name]: errors[e.target.name] })
   }
 
