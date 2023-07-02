@@ -1,6 +1,9 @@
 import { useState } from "react"
 import Input from "./Input"
 
+import { db } from "../firebase/db"
+import { collection, addDoc } from "firebase/firestore"
+
 function Form() {
   const [form, setForm] = useState({
     firstName: "",
@@ -16,12 +19,21 @@ function Form() {
     website: ""
   })
 
+  const cardsCollectionRef = collection(db, "cards")
+
   const change = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
+  const submit = async (e) => {
+    e.preventDefault();
+
+    await addDoc(cardsCollectionRef, { ...form })
+
+  }
+
   return (
-    <form>
+    <form onSubmit={submit}>
       <Input
         name="firstName"
         type="text"
