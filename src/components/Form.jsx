@@ -1,8 +1,10 @@
 import { useState } from "react"
 import Input from "./Input"
 
-import { db } from "../firebase/db"
+import { db } from "../firebase/config"
+import { storage } from "../firebase/config"
 import { collection, addDoc } from "firebase/firestore"
+import { ref, uploadBytes } from "firebase/storage"
 import validateForm from "../utils/validateForm"
 
 function Form() {
@@ -20,6 +22,7 @@ function Form() {
     country: "",
     website: "",
     slug: "ae1234",
+    avatar: null,
     created_at: new Date()
   })
 
@@ -37,16 +40,21 @@ function Form() {
   const submit = async (e) => {
     e.preventDefault();
 
-    const errors = validateForm(form)
+    // const errors = validateForm(form)
 
-    if (!errors) {
-      await addDoc(cardsCollectionRef, { ...form })
-    } else {
-      setValidation({ ...errors })
-      return
-    }
+    // if (!errors) {
+    //   await addDoc(cardsCollectionRef, { ...form })
+    // } else {
+    //   setValidation({ ...errors })
+    //   return
+    // }
 
+    if (form.avatar === null) return;
 
+    const image = ref(storage, `avatars/test.jpg`)
+    uploadBytes(image, form.avatar).then(() => {
+      alert("image up")
+    })
 
   }
 
@@ -164,6 +172,8 @@ function Form() {
         onBlur={validate}
         validation={validation}
       />
+
+      <input type="file" name="" id="" onChange={(e) => setForm({ ...form, avatar: e.target.files[0] })} />
 
       <button type="submit">submit</button>
     </form>

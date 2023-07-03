@@ -1,16 +1,12 @@
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
-import { collection, doc, getDocs, query, where } from "firebase/firestore"
+import { collection, getDocs, query, where } from "firebase/firestore"
 
-import { db } from "../firebase/db"
+import { db } from "../firebase/config"
 
 function Profile() {
   const { slug } = useParams()
   const [user, setUser] = useState({})
-  const cardsCollection = collection(db, "cards")
-
-
-
 
   useEffect(() => {
     const getUser = async () => {
