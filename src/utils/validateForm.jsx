@@ -1,6 +1,6 @@
 function validateForm(form) {
 
-  let errors = {};
+  let errors = {}
 
   if (!form.firstName) {
     errors = { ...errors, firstName: "Please enter a first name." }
@@ -22,12 +22,12 @@ function validateForm(form) {
     errors = { ...errors, website: "Please enter a valid website." }
   }
 
-  if (form.avatar) {
-    const size = form.avatar.size / 1024 / 1024;
+  if (form.avatarImage) {
+    const size = form.avatarImage.size / 1024 / 1024;
     if (size > 2) {
-      errors = { ...errors, avatar: "Please choose a photo under 2MB in size." }
-    } else if (!["jpg", "jpeg", "png"].includes(form.avatar.name.split('.').pop())) {
-      errors = { ...errors, avatar: "Please make sure your photo has a valid extension." }
+      errors = { ...errors, avatarImage: "Please choose a photo under 2MB in size." }
+    } else if (!["jpg", "jpeg", "png"].includes(form.avatarImage.name.split('.').pop())) {
+      errors = { ...errors, avatarImage: "Please make sure your photo has a valid extension." }
     }
   }
 

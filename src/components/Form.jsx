@@ -7,8 +7,12 @@ import { collection, addDoc } from "firebase/firestore"
 import { ref, uploadBytes } from "firebase/storage"
 import validateForm from "../utils/validateForm"
 
+import generateUniqueId from "../utils/generateUniqueId"
+import getFileExtension from "../utils/getFileExtension"
+
 function Form() {
   const [validation, setValidation] = useState({})
+  const profilesCollection = collection(db, "profiles")
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -21,15 +25,18 @@ function Form() {
     city: "",
     country: "",
     website: "",
-    slug: "ae1234",
-    avatar: null,
+    avatar: "",
+    avatarImage: null,
+    slug: generateUniqueId("slug", 7)(),
     created_at: new Date()
   })
 
-  const cardsCollectionRef = collection(db, "cards")
-
   const change = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
+  }
+
+  const changeImage = (e) => {
+    setForm({ ...form, avatarImage: e.target.files[0] })
   }
 
   const validate = (e) => {
@@ -40,25 +47,29 @@ function Form() {
   const submit = async (e) => {
     e.preventDefault();
 
-    // const errors = validateForm(form)
+    const errors = validateForm(form)
 
-    // if (!errors) {
-    //   await addDoc(cardsCollectionRef, { ...form })
-    // } else {
-    //   setValidation({ ...errors })
-    //   return
-    // }
+    if (Object.keys(errors).length === 0) {
+      const { avatarImage, ...profile } = form;
 
-    if (form.avatar === null) return;
+      console.log(errors)
+      console.log(form)
 
-    const image = ref(storage, `avatars/test.jpg`)
-    uploadBytes(image, form.avatar).then(() => {
-      alert("image up")
-    })
+      await addDoc(profilesCollection, { ...profile })
+
+      if (avatarImage === null) return;
+
+      const image = ref(storage, `avatars/${generateUniqueId("image", 20)()}.${getFileExtension(avatarImage)}`)
+      uploadBytes(image, avatarImage).then(() => {
+        alert("image up")
+      })
+
+    } else {
+      setValidation({ ...errors })
+      return
+    }
 
   }
-
-
 
   return (
     <form onSubmit={submit}>
@@ -172,9 +183,16 @@ function Form() {
         onBlur={validate}
         validation={validation}
       />
-
-      <input type="file" name="" id="" onChange={(e) => setForm({ ...form, avatar: e.target.files[0] })} />
-
+      <Input
+        name="avatarImage"
+        type="file"
+        accept=".png, .jpg, .jpeg"
+        label="Avatar"
+        onChange={changeImage}
+        onBlur={validate}
+        validation={validation}
+      />
+      <br /><br />
       <button type="submit">submit</button>
     </form>
   )
