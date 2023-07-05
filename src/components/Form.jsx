@@ -50,19 +50,20 @@ function Form() {
     const errors = validateForm(form)
 
     if (Object.keys(errors).length === 0) {
-      const { avatarImage, ...profile } = form;
+      const { avatarImage, avatar, ...profile } = form;
 
-      console.log(errors)
-      console.log(form)
+      if (avatarImage === null) {
+        await addDoc(profilesCollection, { ...profile, avatar: "" })
+      } else {
+        const avatarFilename = `${generateUniqueId("image", 20)()}.${getFileExtension(avatarImage)}`
+        const image = ref(storage, `avatars/${avatarFilename}`)
+        uploadBytes(image, avatarImage).then(async () => {
+          await addDoc(profilesCollection, { ...profile, avatar: avatarFilename })
+          alert("image up")
+        })
+      }
 
-      await addDoc(profilesCollection, { ...profile })
 
-      if (avatarImage === null) return;
-
-      const image = ref(storage, `avatars/${generateUniqueId("image", 20)()}.${getFileExtension(avatarImage)}`)
-      uploadBytes(image, avatarImage).then(() => {
-        alert("image up")
-      })
 
     } else {
       setValidation({ ...errors })
