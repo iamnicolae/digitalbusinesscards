@@ -1,16 +1,18 @@
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { collection, getDocs, query, where } from "firebase/firestore"
+import { ref, getDownloadURL } from "firebase/storage"
 
-import { db } from "../firebase/config"
+import { db, storage } from "../firebase/config"
 
 function Profile() {
   const { slug } = useParams()
   const [user, setUser] = useState({})
+  const [userAvatar, setUserAvatar] = useState("")
 
   useEffect(() => {
     const getUser = async () => {
-      const q = query(collection(db, "cards"), where("slug", "==", slug))
+      const q = query(collection(db, "profiles"), where("slug", "==", slug))
 
       const querySnapshot = await getDocs(q);
 
@@ -22,12 +24,22 @@ function Profile() {
     }
 
     getUser()
+
   }, [])
+
+  useEffect(() => {
+    if (Object.keys(user).length !== 0) {
+      getDownloadURL(ref(storage, `avatars/${user.avatar}`)).then((url) => {
+        setUserAvatar(url)
+      })
+    }
+  }, [user])
 
   return (
     <>
       <h1>PROFILE</h1>
       <p>business card stuff for {user.firstName} / {user.lastName}</p>
+      <img src={userAvatar} alt="" />
 
     </>
   )
