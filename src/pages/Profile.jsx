@@ -1,9 +1,10 @@
 import { useParams } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { collection, getDocs, query, where } from "firebase/firestore"
 import { ref, getDownloadURL } from "firebase/storage"
 
 import { db, storage } from "../firebase/config"
+import Map from "../components/Map"
 
 function Profile() {
   const { slug } = useParams()
@@ -35,11 +36,14 @@ function Profile() {
     }
   }, [user])
 
+
   return (
     <>
       <h1>PROFILE</h1>
       <p>business card stuff for {user.firstName} / {user.lastName}</p>
       <img src={userAvatar} alt="" />
+
+      <Map street="267 5th Avenue" city="New York City" country="United States" />
 
     </>
   )
