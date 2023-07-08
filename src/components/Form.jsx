@@ -11,6 +11,17 @@ import generateUniqueId from "../utils/generateUniqueId"
 import getFileExtension from "../utils/getFileExtension"
 
 import ProfileContext from "../contexts/ProfileContext"
+import { styled } from "styled-components"
+
+const FormContainer = styled.form`
+  //background: lightgreen;
+
+`
+
+const InputWrap = styled.div`
+  display: flex;
+  gap: 10px;
+`
 
 function Form() {
 
@@ -53,117 +64,136 @@ function Form() {
   }
 
   return (
-    <form onSubmit={submit}>
-      <Input
-        name="firstName"
-        type="text"
-        label="First Name"
-        placeholder="e.g. Michael"
-        value={profile.firstName}
-        onChange={changeProfile}
-        onBlur={validate}
-        validation={validation}
-      />
-      <Input
-        name="lastName"
-        type="text"
-        label="Last Name"
-        placeholder="e.g. Anderson"
-        value={profile.lastName}
-        onChange={changeProfile}
-        onBlur={validate}
-        validation={validation}
-      />
-      <Input
-        name="mobile"
-        type="tel"
-        label="Mobile"
-        placeholder="e.g. 07911 123456"
-        value={profile.mobile}
-        onChange={changeProfile}
-        onBlur={validate}
-        validation={validation}
-      />
-      <Input
-        name="phone"
-        type="tel"
-        label="Phone"
-        placeholder="e.g. (000) 1234 4321"
-        value={profile.phone}
-        onChange={changeProfile}
-        onBlur={validate}
-        validation={validation}
-      />
-      <Input
-        name="email"
-        type="text"
-        label="Email"
-        placeholder="e.g. michael@anderson.com"
-        value={profile.email}
-        onChange={changeProfile}
-        onBlur={validate}
-        validation={validation}
-      />
-      <Input
-        name="company"
-        type="text"
-        label="Company"
-        placeholder="e.g. TheCompany"
-        value={profile.company}
-        onChange={changeProfile}
-        onBlur={validate}
-        validation={validation}
-      />
-      <Input
-        name="position"
-        type="text"
-        label="Position"
-        placeholder="e.g. Technical Director"
-        value={profile.position}
-        onChange={changeProfile}
-        onBlur={validate}
-        validation={validation}
-      />
-      <Input
-        name="street"
-        type="text"
-        label="Street"
-        placeholder="e.g. 199 Bourke Avenue"
-        value={profile.street}
-        onChange={changeProfile}
-        onBlur={validate}
-        validation={validation}
-      />
-      <Input
-        name="city"
-        type="text"
-        label="City"
-        placeholder="e.g. Berlin"
-        value={profile.city}
-        onChange={changeProfile}
-        onBlur={validate}
-        validation={validation}
-      />
-      <Input
-        name="country"
-        type="text"
-        label="Country"
-        placeholder="e.g. Spain"
-        value={profile.country}
-        onChange={changeProfile}
-        onBlur={validate}
-        validation={validation}
-      />
-      <Input
-        name="website"
-        type="url"
-        label="Website"
-        placeholder="e.g. https://getqr.cc"
-        value={profile.website}
-        onChange={changeProfile}
-        onBlur={validate}
-        validation={validation}
-      />
+    <FormContainer onSubmit={submit}>
+
+      <InputWrap>
+        <Input
+          name="firstName"
+          type="text"
+          label="First Name (required)"
+          placeholder="e.g. Michael"
+          value={profile.firstName}
+          onChange={changeProfile}
+          onBlur={validate}
+          validation={validation}
+        />
+        <Input
+          name="lastName"
+          type="text"
+          label="Last Name (required)"
+          placeholder="e.g. Anderson"
+          value={profile.lastName}
+          onChange={changeProfile}
+          onBlur={validate}
+          validation={validation}
+        />
+      </InputWrap>
+
+      <InputWrap>
+        <Input
+          name="mobile"
+          type="tel"
+          label="Mobile (required)"
+          placeholder="e.g. 07911 123456"
+          value={profile.mobile}
+          onChange={changeProfile}
+          onBlur={validate}
+          validation={validation}
+        />
+        <Input
+          name="phone"
+          type="tel"
+          label="Phone"
+          placeholder="e.g. (000) 1234 4321"
+          value={profile.phone}
+          onChange={changeProfile}
+          onBlur={validate}
+          validation={validation}
+        />
+      </InputWrap>
+
+      <InputWrap>
+        <Input
+          name="company"
+          type="text"
+          label="Company"
+          placeholder="e.g. TheCompany"
+          value={profile.company}
+          onChange={changeProfile}
+          onBlur={validate}
+          validation={validation}
+        />
+        <Input
+          name="position"
+          type="text"
+          label="Position"
+          placeholder="e.g. Technical Director"
+          value={profile.position}
+          onChange={changeProfile}
+          onBlur={validate}
+          validation={validation}
+        />
+      </InputWrap>
+
+      <InputWrap>
+        <Input
+          name="email"
+          type="text"
+          label="Email"
+          placeholder="e.g. michael@anderson.com"
+          value={profile.email}
+          onChange={changeProfile}
+          onBlur={validate}
+          validation={validation}
+        />
+
+        <Input
+          name="website"
+          type="url"
+          label="Website"
+          placeholder="e.g. https://getqr.cc"
+          value={profile.website}
+          onChange={changeProfile}
+          onBlur={validate}
+          validation={validation}
+        />
+      </InputWrap>
+
+      <InputWrap>
+        <Input
+          name="street"
+          type="text"
+          label="Street"
+          placeholder="e.g. 199 Bourke Avenue"
+          value={profile.street}
+          onChange={changeProfile}
+          onBlur={validate}
+          validation={validation}
+        />
+        <Input
+          name="city"
+          type="text"
+          label="City"
+          placeholder="e.g. Berlin"
+          value={profile.city}
+          onChange={changeProfile}
+          onBlur={validate}
+          validation={validation}
+          halfWidth
+        />
+        <Input
+          name="country"
+          type="text"
+          label="Country"
+          placeholder="e.g. Spain"
+          value={profile.country}
+          onChange={changeProfile}
+          onBlur={validate}
+          validation={validation}
+          halfWidth
+        />
+      </InputWrap>
+
       <Input
         name="avatarImage"
         type="file"
@@ -172,10 +202,11 @@ function Form() {
         onChange={changeProfileImage}
         onBlur={validate}
         validation={validation}
+        fullWidth
       />
       <br /><br />
       <button type="submit">submit</button>
-    </form>
+    </FormContainer>
   )
 }
 
