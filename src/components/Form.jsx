@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
 import Input from "./Input"
 
 import { db } from "../firebase/config"
@@ -10,55 +10,35 @@ import validateForm from "../utils/validateForm"
 import generateUniqueId from "../utils/generateUniqueId"
 import getFileExtension from "../utils/getFileExtension"
 
+import ProfileContext from "../contexts/ProfileContext"
+
 function Form() {
+
+  const { profile, changeProfile, changeProfileImage } = useContext(ProfileContext)
+
   const [validation, setValidation] = useState({})
   const profilesCollection = collection(db, "profiles")
-  const [form, setForm] = useState({
-    firstName: "",
-    lastName: "",
-    mobile: "",
-    phone: "",
-    email: "",
-    company: "",
-    position: "",
-    street: "",
-    city: "",
-    country: "",
-    website: "",
-    avatar: "",
-    avatarImage: null,
-    slug: generateUniqueId("slug", 7)(),
-    created_at: new Date()
-  })
-
-  const change = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value })
-  }
-
-  const changeImage = (e) => {
-    setForm({ ...form, avatarImage: e.target.files[0] })
-  }
 
   const validate = (e) => {
-    const errors = validateForm(form)
+    const errors = validateForm(profile)
     setValidation({ [e.target.name]: errors[e.target.name] })
   }
 
   const submit = async (e) => {
     e.preventDefault();
 
-    const errors = validateForm(form)
+    const errors = validateForm(profile)
 
     if (Object.keys(errors).length === 0) {
-      const { avatarImage, avatar, ...profile } = form;
+      const { avatarImage, avatar, ...profileData } = profile;
 
       if (avatarImage === null) {
-        await addDoc(profilesCollection, { ...profile, avatar: "" })
+        await addDoc(profilesCollection, { ...profileData, avatar: "" })
       } else {
         const avatarFilename = `${generateUniqueId("image", 20)()}.${getFileExtension(avatarImage)}`
         const image = ref(storage, `avatars/${avatarFilename}`)
         uploadBytes(image, avatarImage).then(async () => {
-          await addDoc(profilesCollection, { ...profile, avatar: avatarFilename })
+          await addDoc(profilesCollection, { ...profileData, avatar: avatarFilename })
           alert("image up")
         })
       }
@@ -79,8 +59,8 @@ function Form() {
         type="text"
         label="First Name"
         placeholder="e.g. Michael"
-        value={form.firstName}
-        onChange={change}
+        value={profile.firstName}
+        onChange={changeProfile}
         onBlur={validate}
         validation={validation}
       />
@@ -89,8 +69,8 @@ function Form() {
         type="text"
         label="Last Name"
         placeholder="e.g. Anderson"
-        value={form.lastName}
-        onChange={change}
+        value={profile.lastName}
+        onChange={changeProfile}
         onBlur={validate}
         validation={validation}
       />
@@ -99,8 +79,8 @@ function Form() {
         type="tel"
         label="Mobile"
         placeholder="e.g. 07911 123456"
-        value={form.mobile}
-        onChange={change}
+        value={profile.mobile}
+        onChange={changeProfile}
         onBlur={validate}
         validation={validation}
       />
@@ -109,8 +89,8 @@ function Form() {
         type="tel"
         label="Phone"
         placeholder="e.g. (000) 1234 4321"
-        value={form.phone}
-        onChange={change}
+        value={profile.phone}
+        onChange={changeProfile}
         onBlur={validate}
         validation={validation}
       />
@@ -119,8 +99,8 @@ function Form() {
         type="text"
         label="Email"
         placeholder="e.g. michael@anderson.com"
-        value={form.email}
-        onChange={change}
+        value={profile.email}
+        onChange={changeProfile}
         onBlur={validate}
         validation={validation}
       />
@@ -129,8 +109,8 @@ function Form() {
         type="text"
         label="Company"
         placeholder="e.g. TheCompany"
-        value={form.company}
-        onChange={change}
+        value={profile.company}
+        onChange={changeProfile}
         onBlur={validate}
         validation={validation}
       />
@@ -139,8 +119,8 @@ function Form() {
         type="text"
         label="Position"
         placeholder="e.g. Technical Director"
-        value={form.position}
-        onChange={change}
+        value={profile.position}
+        onChange={changeProfile}
         onBlur={validate}
         validation={validation}
       />
@@ -149,8 +129,8 @@ function Form() {
         type="text"
         label="Street"
         placeholder="e.g. 199 Bourke Avenue"
-        value={form.street}
-        onChange={change}
+        value={profile.street}
+        onChange={changeProfile}
         onBlur={validate}
         validation={validation}
       />
@@ -159,8 +139,8 @@ function Form() {
         type="text"
         label="City"
         placeholder="e.g. Berlin"
-        value={form.city}
-        onChange={change}
+        value={profile.city}
+        onChange={changeProfile}
         onBlur={validate}
         validation={validation}
       />
@@ -169,8 +149,8 @@ function Form() {
         type="text"
         label="Country"
         placeholder="e.g. Spain"
-        value={form.country}
-        onChange={change}
+        value={profile.country}
+        onChange={changeProfile}
         onBlur={validate}
         validation={validation}
       />
@@ -179,8 +159,8 @@ function Form() {
         type="url"
         label="Website"
         placeholder="e.g. https://getqr.cc"
-        value={form.website}
-        onChange={change}
+        value={profile.website}
+        onChange={changeProfile}
         onBlur={validate}
         validation={validation}
       />
@@ -189,7 +169,7 @@ function Form() {
         type="file"
         accept=".png, .jpg, .jpeg"
         label="Avatar"
-        onChange={changeImage}
+        onChange={changeProfileImage}
         onBlur={validate}
         validation={validation}
       />
