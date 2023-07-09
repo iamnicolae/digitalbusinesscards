@@ -205,7 +205,7 @@ function Form() {
         fullWidth
       />
       <br /><br />
-      <button type="submit">submit</button>
+      <button type="submit">GET QR CODE</button>
     </FormContainer>
   )
 }

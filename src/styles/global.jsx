@@ -95,8 +95,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
-    background-image: url("/assets/background.jpg");
-    background-size: cover;
+    background: var(--color-lightPrimary);
   }
 
   body, 
