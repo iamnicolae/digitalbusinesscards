@@ -64,7 +64,7 @@ function Map({ street, city, country }) {
 
   return (
     <div>
-      <div ref={mapContainerRef} style={{ width: '500px', height: '500px', background: 'lightgrey' }} />
+      <div ref={mapContainerRef} style={{ width: '100%', height: 'auto' }} />
     </div>
   )
 }
