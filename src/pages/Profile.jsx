@@ -162,58 +162,58 @@ function Profile() {
             </Avatar>
             <div>
               <Name>{user.firstName} {user.lastName}</Name>
-              <Links>
-                <a href=""><BiSolidPhoneCall /> Call</a>
-                <a href=""><RiSendPlaneFill /> Email</a>
-              </Links>
+              {(user.mobile || user.email) && <Links>
+                {user.mobile && <a href=""><BiSolidPhoneCall /> Call</a>}
+                {user.email && <a href=""><RiSendPlaneFill /> Email</a>}
+              </Links>}
             </div>
 
           </AvatarName>
 
         </Header>
 
-        <Fields>
-          <Field>
+        {(user.mobile || user.phone) && <Fields>
+          {user.mobile && <Field>
             <Label><RiCellphoneLine /> Mobile</Label>
             <Info>{user.mobile}</Info>
-          </Field>
+          </Field>}
 
-          <Field>
+          {user.phone && <Field>
             <Label><BiPhone /> Telephone</Label>
             <Info>{user.phone}</Info>
-          </Field>
-        </Fields>
+          </Field>}
+        </Fields>}
 
-        <Field>
+        {user.email && <Field>
           <Label><HiOutlineMail /> Email</Label>
           <Info>{user.email}</Info>
-        </Field>
+        </Field>}
 
-        <Fields>
-          <Field>
+        {(user.company || user.position) && <Fields>
+          {user.company && <Field>
             <Label><PiBuildingsBold /> Company</Label>
             <Info>{user.company}</Info>
-          </Field>
+          </Field>}
 
-          <Field>
+          {user.position && <Field>
             <Label><HiOutlineBriefcase /> Position</Label>
             <Info>{user.position}</Info>
-          </Field>
-        </Fields>
+          </Field>}
+        </Fields>}
 
-        <Field>
+        {(user.street || user.city || user.country) && <Field>
           <Label><FiMapPin /> Address</Label>
-          <Info>{user.street}, {user.city}, {user.country}</Info>
-        </Field>
+          <Info>{user.street && `${user.street}, `}{user.city && `${user.city}, `}{user.country && `${user.country}`}</Info>
+        </Field>}
 
         {/* <Field>
           <Map street="267 5th Avenue" city="New York City" country="United States" />
         </Field> */}
 
-        <Field>
+        {user.website && <Field>
           <Label><HiOutlineGlobeAlt /> Website</Label>
           <Info>{user.website}</Info>
-        </Field>
+        </Field>}
 
       </Container>
     </Background>
