@@ -13,6 +13,7 @@ import { PiBuildingsBold } from 'react-icons/pi'
 import { FiMapPin } from 'react-icons/fi'
 import { BiPhone, BiSolidPhoneCall } from 'react-icons/bi'
 import { RiCellphoneLine, RiSendPlaneFill } from 'react-icons/ri'
+import generateAvatar from "../utils/generateAvatar"
 
 const Background = styled.main`
   width: 100%;
@@ -157,7 +158,7 @@ function Profile() {
         <Header>
           <AvatarName>
             <Avatar>
-              <img src={userAvatar} alt={`${user.firstName} ${user.lastName}`} />
+              {userAvatar ? <img src={userAvatar} alt={`${user.firstName} ${user.lastName}`} /> : generateAvatar(user.firstName, user.lastName)}
             </Avatar>
             <div>
               <Name>{user.firstName} {user.lastName}</Name>
