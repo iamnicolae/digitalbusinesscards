@@ -99,6 +99,10 @@ const Field = styled.div`
   box-shadow: rgba(10, 11, 13, 0.025) 0px 1px 2px 0px;
 `
 
+const MapField = styled(Field)`
+  display: ${props => props.$display ? "flex" : "none"};
+`;
+
 const Label = styled.span`
   display: flex;
   align-items: center;
@@ -121,6 +125,7 @@ function Profile() {
   const { slug } = useParams()
   const [user, setUser] = useState({})
   const [userAvatar, setUserAvatar] = useState("")
+  const [showMap, setShowMap] = useState(false)
 
   useEffect(() => {
     const getUser = async () => {
@@ -204,11 +209,12 @@ function Profile() {
         {(user.street || user.city || user.country) && <Field>
           <Label><FiMapPin /> Address</Label>
           <Info>{user.street && `${user.street}, `}{user.city && `${user.city}, `}{user.country && `${user.country}`}</Info>
+          <button onClick={() => setShowMap(!showMap)}>show on the map</button>
         </Field>}
 
-        {/* <Field>
+        <MapField $display={showMap}>
           <Map street="267 5th Avenue" city="New York City" country="United States" />
-        </Field> */}
+        </MapField>
 
         {user.website && <Field>
           <Label><HiOutlineGlobeAlt /> Website</Label>
