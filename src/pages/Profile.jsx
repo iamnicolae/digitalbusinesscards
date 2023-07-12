@@ -14,6 +14,7 @@ import { FiMapPin } from 'react-icons/fi'
 import { BiPhone, BiSolidPhoneCall } from 'react-icons/bi'
 import { RiCellphoneLine, RiSendPlaneFill } from 'react-icons/ri'
 import generateAvatar from "../utils/generateAvatar"
+import generateVCard from "../utils/generateVCard"
 
 const Background = styled.main`
   width: 100%;
@@ -153,6 +154,13 @@ function Profile() {
   }, [user])
 
 
+  const downloadVCard = () => {
+    console.log("download vcard")
+
+
+  }
+
+
   return (
     <Background>
       <Container>
@@ -220,6 +228,10 @@ function Profile() {
           <Label><HiOutlineGlobeAlt /> Website</Label>
           <Info>{user.website}</Info>
         </Field>}
+
+        <button onClick={() => generateVCard(user)}>
+          +download vCard
+        </button>
 
       </Container>
     </Background>
