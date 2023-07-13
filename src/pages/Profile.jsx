@@ -13,6 +13,8 @@ import { PiBuildingsBold } from 'react-icons/pi'
 import { FiMapPin } from 'react-icons/fi'
 import { BiPhone, BiSolidPhoneCall } from 'react-icons/bi'
 import { RiCellphoneLine, RiSendPlaneFill } from 'react-icons/ri'
+import { FaUserPlus } from 'react-icons/fa'
+import { BsGlobeAmericas } from 'react-icons/bs'
 import generateAvatar from "../utils/generateAvatar"
 import generateVCard from "../utils/generateVCard"
 
@@ -98,10 +100,23 @@ const Field = styled.div`
   padding: 20px;
   border-radius: 20px;
   box-shadow: rgba(10, 11, 13, 0.025) 0px 1px 2px 0px;
+  ${props => props.$relative ? "position: relative" : ""};
 `
 
 const MapField = styled(Field)`
-  display: ${props => props.$display ? "flex" : "none"};
+  ${props => props.$display ? `
+    height: 635px;
+    padding: 20px;
+    margin-top: 0;
+    overflow: visible;
+  ` : `
+    height: 0;
+    padding: 0;
+    margin-top: -20px;
+    overflow: hidden;
+  `};
+
+  
 `;
 
 const Label = styled.span`
@@ -120,6 +135,43 @@ const Label = styled.span`
 
 const Info = styled.span`
   font-size: 2rem;
+`
+
+const Download = styled.button`
+  width: 220px;
+  background: #695BD7;
+  color: #fff;
+  border-radius: 30px;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 1.5rem;
+  padding: 15px 0;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  line-height: 0;
+
+  svg {
+    font-size: 1.7rem;
+  }
+`
+
+const ShowMapButton = styled.button`
+  background: none;
+  padding: 0;
+  font-size: 1.4rem;
+  font-style: italic;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  line-height: 0;
+  margin-top: 5px;
+  /* position: absolute;
+  top: 20px;
+  right: 20px; */
 `
 
 function Profile() {
@@ -214,10 +266,9 @@ function Profile() {
           </Field>}
         </Fields>}
 
-        {(user.street || user.city || user.country) && <Field>
+        {(user.street || user.city || user.country) && <Field $relative={true}>
           <Label><FiMapPin /> Address</Label>
-          <Info>{user.street && `${user.street}, `}{user.city && `${user.city}, `}{user.country && `${user.country}`}</Info>
-          <button onClick={() => setShowMap(!showMap)}>show on the map</button>
+          <Info>{user.street && `${user.street}, `}{user.city && `${user.city}, `}{user.country && `${user.country}`} <ShowMapButton onClick={() => setShowMap(!showMap)}><BsGlobeAmericas />Show map</ShowMapButton></Info>
         </Field>}
 
         <MapField $display={showMap}>
@@ -226,12 +277,10 @@ function Profile() {
 
         {user.website && <Field>
           <Label><HiOutlineGlobeAlt /> Website</Label>
-          <Info>{user.website}</Info>
+          <Info><a href={user.website} target="_blank">{user.website}</a></Info>
         </Field>}
 
-        <button onClick={() => generateVCard(user)}>
-          +download vCard
-        </button>
+        <Download onClick={() => generateVCard(user)}><FaUserPlus /> Download vCard</Download>
 
       </Container>
     </Background>

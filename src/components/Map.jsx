@@ -1,10 +1,29 @@
 import { useRef, useEffect, useState, useCallback } from "react"
+import { styled } from "styled-components"
 import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import mbxGeocoding from '@mapbox/mapbox-sdk/services/geocoding';
 // import mapboxSdk from "@mapbox/mapbox-sdk"
 // 
 // const mapboxClient = mapboxSdk({ accessToken: mapboxgl.accessToken })
+
+import { BsApple } from "react-icons/bs"
+import { SiWaze } from "react-icons/si"
+import { SiGooglemaps } from "react-icons/si"
+
+const DirectionLinks = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+  
+  a {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+`
 
 function Map({ street, city, country }) {
   const map = useRef(null)
@@ -110,15 +129,11 @@ function Map({ street, city, country }) {
   return (
     <div>
       <div ref={mapContainerRef} style={{ width: '100%', height: '500px' }} />
-      <a href={`https://www.google.com/maps/dir//${encodeURIComponent(street + " " + city + " " + country)}`} target="_blank">get directions on google maps</a>
-
-      <br />
-
-      <a href={`https://waze.com/ul?ll=${location[1]},${location[0]}&navigate=yes`} target="_blank">get directions on waze</a>
-
-      <br />
-
-      <a href={`http://maps.apple.com/?address=${encodeURIComponent(street + " " + city + " " + country)}`} target="_blank">get directions on apple maps</a>
+      <DirectionLinks>
+        <a href={`https://www.google.com/maps/dir//${encodeURIComponent(street + " " + city + " " + country)}`} target="_blank"><SiGooglemaps /> Get directions on Google Maps</a>
+        <a href={`https://waze.com/ul?ll=${location[1]},${location[0]}&navigate=yes`} target="_blank"><SiWaze /> Get directions on Waze</a>
+        <a href={`http://maps.apple.com/?address=${encodeURIComponent(street + " " + city + " " + country)}`} target="_blank"><BsApple /> Get directions on Apple Maps</a>
+      </DirectionLinks>
     </div>
   )
 }
