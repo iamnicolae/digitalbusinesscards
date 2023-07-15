@@ -280,7 +280,7 @@ function Profile() {
           <Info><a href={user.website} target="_blank">{user.website}</a></Info>
         </Field>}
 
-        <Download onClick={() => generateVCard(user)}><FaUserPlus /> Download vCard</Download>
+        <Download onClick={() => generateVCard(user, userAvatar)}><FaUserPlus /> Download vCard</Download>
 
       </Container>
     </Background>
