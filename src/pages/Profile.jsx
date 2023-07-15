@@ -5,6 +5,7 @@ import { ref, getDownloadURL } from "firebase/storage"
 
 import { db, storage } from "../firebase/config"
 import Map from "../components/Map"
+import Loading from "../components/Loading"
 import { styled } from "styled-components"
 
 //import { IoCall } from "react-icons/io"
@@ -176,6 +177,7 @@ const ShowMapButton = styled.button`
 
 function Profile() {
   const { slug } = useParams()
+  const [isLoading, setIsLoading] = useState(true)
   const [user, setUser] = useState({})
   const [userAvatar, setUserAvatar] = useState("")
   const [showMap, setShowMap] = useState(false)
@@ -186,10 +188,11 @@ function Profile() {
 
       const querySnapshot = await getDocs(q);
 
-      querySnapshot.forEach((doc) => {
+      querySnapshot.forEach((doc) => {//only one doc
         // doc.data() is never undefined for query doc snapshots
         console.log(doc.id, " => ", doc.data());
         setUser(doc.data())
+        //setIsLoading(false)
       });
     }
 
@@ -215,74 +218,72 @@ function Profile() {
 
   return (
     <Background>
-      <Container>
+      {isLoading ? <Loading /> :
+        <Container>
+          <Header>
+            <AvatarName>
+              <Avatar>
+                {userAvatar ? <img src={userAvatar} alt={`${user.firstName} ${user.lastName}`} /> : generateAvatar(user.firstName, user.lastName)}
+              </Avatar>
+              <div>
+                <Name>{user.firstName} {user.lastName}</Name>
+                {(user.mobile || user.email) && <Links>
+                  {user.mobile && <a href=""><BiSolidPhoneCall /> Call</a>}
+                  {user.email && <a href=""><RiSendPlaneFill /> Email</a>}
+                </Links>}
+              </div>
 
+            </AvatarName>
 
+          </Header>
 
+          {(user.mobile || user.phone) && <Fields>
+            {user.mobile && <Field>
+              <Label><RiCellphoneLine /> Mobile</Label>
+              <Info>{user.mobile}</Info>
+            </Field>}
 
-        <Header>
-          <AvatarName>
-            <Avatar>
-              {userAvatar ? <img src={userAvatar} alt={`${user.firstName} ${user.lastName}`} /> : generateAvatar(user.firstName, user.lastName)}
-            </Avatar>
-            <div>
-              <Name>{user.firstName} {user.lastName}</Name>
-              {(user.mobile || user.email) && <Links>
-                {user.mobile && <a href=""><BiSolidPhoneCall /> Call</a>}
-                {user.email && <a href=""><RiSendPlaneFill /> Email</a>}
-              </Links>}
-            </div>
+            {user.phone && <Field>
+              <Label><BiPhone /> Telephone</Label>
+              <Info>{user.phone}</Info>
+            </Field>}
+          </Fields>}
 
-          </AvatarName>
-
-        </Header>
-
-        {(user.mobile || user.phone) && <Fields>
-          {user.mobile && <Field>
-            <Label><RiCellphoneLine /> Mobile</Label>
-            <Info>{user.mobile}</Info>
+          {user.email && <Field>
+            <Label><HiOutlineMail /> Email</Label>
+            <Info>{user.email}</Info>
           </Field>}
 
-          {user.phone && <Field>
-            <Label><BiPhone /> Telephone</Label>
-            <Info>{user.phone}</Info>
+          {(user.company || user.position) && <Fields>
+            {user.company && <Field>
+              <Label><PiBuildingsBold /> Company</Label>
+              <Info>{user.company}</Info>
+            </Field>}
+
+            {user.position && <Field>
+              <Label><HiOutlineBriefcase /> Position</Label>
+              <Info>{user.position}</Info>
+            </Field>}
+          </Fields>}
+
+          {(user.street || user.city || user.country) && <Field $relative={true}>
+            <Label><FiMapPin /> Address</Label>
+            <Info>{user.street && `${user.street}, `}{user.city && `${user.city}, `}{user.country && `${user.country}`} <ShowMapButton onClick={() => setShowMap(!showMap)}><BsGlobeAmericas />Show map</ShowMapButton></Info>
           </Field>}
-        </Fields>}
 
-        {user.email && <Field>
-          <Label><HiOutlineMail /> Email</Label>
-          <Info>{user.email}</Info>
-        </Field>}
+          <MapField $display={showMap}>
+            <Map street="267 5th Avenue" city="New York City" country="United States" />
+          </MapField>
 
-        {(user.company || user.position) && <Fields>
-          {user.company && <Field>
-            <Label><PiBuildingsBold /> Company</Label>
-            <Info>{user.company}</Info>
+          {user.website && <Field>
+            <Label><HiOutlineGlobeAlt /> Website</Label>
+            <Info><a href={user.website} target="_blank">{user.website}</a></Info>
           </Field>}
 
-          {user.position && <Field>
-            <Label><HiOutlineBriefcase /> Position</Label>
-            <Info>{user.position}</Info>
-          </Field>}
-        </Fields>}
+          <Download onClick={() => generateVCard(user, userAvatar)}><FaUserPlus /> Download vCard</Download>
 
-        {(user.street || user.city || user.country) && <Field $relative={true}>
-          <Label><FiMapPin /> Address</Label>
-          <Info>{user.street && `${user.street}, `}{user.city && `${user.city}, `}{user.country && `${user.country}`} <ShowMapButton onClick={() => setShowMap(!showMap)}><BsGlobeAmericas />Show map</ShowMapButton></Info>
-        </Field>}
-
-        <MapField $display={showMap}>
-          <Map street="267 5th Avenue" city="New York City" country="United States" />
-        </MapField>
-
-        {user.website && <Field>
-          <Label><HiOutlineGlobeAlt /> Website</Label>
-          <Info><a href={user.website} target="_blank">{user.website}</a></Info>
-        </Field>}
-
-        <Download onClick={() => generateVCard(user, userAvatar)}><FaUserPlus /> Download vCard</Download>
-
-      </Container>
+        </Container>
+      }
     </Background>
   )
 }
