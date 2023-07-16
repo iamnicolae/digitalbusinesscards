@@ -3,6 +3,8 @@ import { useEffect, useState, useRef } from "react"
 import { collection, getDocs, query, where } from "firebase/firestore"
 import { ref, getDownloadURL } from "firebase/storage"
 
+import { useNavigate } from "react-router-dom"
+
 import { db, storage } from "../firebase/config"
 import Map from "../components/Map"
 import Loading from "../components/Loading"
@@ -181,6 +183,7 @@ function Profile() {
   const [user, setUser] = useState({})
   const [userAvatar, setUserAvatar] = useState("")
   const [showMap, setShowMap] = useState(false)
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getUser = async () => {
@@ -188,8 +191,15 @@ function Profile() {
 
       const querySnapshot = await getDocs(q);
 
+      console.log(querySnapshot.empty)//reedirect to some upsell page
+
+      if (querySnapshot.empty) {
+        navigate('/notfound', { replace: true })
+      }
+
       querySnapshot.forEach((doc) => {//only one doc
         // doc.data() is never undefined for query doc snapshots
+        console.log(doc)
         console.log(doc.id, " => ", doc.data());
         setUser(doc.data())
         //setIsLoading(false)

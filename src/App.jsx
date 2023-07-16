@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { ProfileProvider } from './contexts/ProfileContext'
 import Home from './pages/Home'
 import Profile from './pages/Profile'
+import NotFound from './pages/NotFound'
 import GlobalStyle from './styles/global'
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/:slug" element={<Profile />} />
+          <Route path="/notfound" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </ProfileProvider>
