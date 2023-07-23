@@ -6,6 +6,8 @@ import QRCode from 'react-qr-code'
 import { useContext } from 'react'
 import ProfileContext from '../contexts/ProfileContext'
 
+import Example from '../components/Example'
+
 const Background = styled.main`
   width: 100%;
   padding: 100px 0;
@@ -41,18 +43,15 @@ const Intro = styled.div`
   
 `
 
+const QR = styled.div`
+  text-align: center;
+  margin-top: 20px;
+`
+
 const Examples = styled.section`
   display: flex;
   justify-content: space-between;
   gap: 50px;
-`
-
-const Example = styled.div`
-  background: white;
-  width: 100%;
-  border-radius: 20px;
-  padding: 70px;
-  height: 400px;
 `
 
 const Footer = styled.footer`
@@ -72,18 +71,38 @@ function Home() {
           <Intro>
             <Title>Digital QR<br />Business<br />Cards</Title>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias quis perferendis reiciendis, ad in, est praesentium officiis ipsam error repellendus exercitationem deleniti facere neque reprehenderit tempora ut obcaecati? Nemo, placeat!</p>
-            <a href={`http://localhost:5173/${profile.slug}`}>
-              <QRCode value={`http://localhost:5173/${profile.slug}`} />
-            </a>
+            <QR>
+              <a href={`http://localhost:5173/${profile.slug}`}>
+                <QRCode value={`http://localhost:5173/${profile.slug}`} />
+              </a>
+            </QR>
           </Intro>
 
           <Form />
         </Header>
 
         <Examples>
-          <Example>exemplu 1</Example>
-          <Example>exemplu 2</Example>
-          <Example>exemplu 3</Example>
+          <Example
+            name="Evangelina Cabrera"
+            avatar="evangelina-cabrera.jpg"
+            company="Pink Paper"
+            position="Chief Editor"
+            profile="http://localhost:5173/mwjwvc8"
+          />
+          <Example
+            name="Wilford Horne"
+            avatar="wilford-horne.jpg"
+            company="Yellllow"
+            position="UX Designer"
+            profile="http://localhost:5173/mwjwvc8"
+          />
+          <Example
+            name="Julius Kopp"
+            avatar="julius-kopp.jpg"
+            company="Bluesky Logistics"
+            position="Logistics Analyst"
+            profile="http://localhost:5173/mwjwvc8"
+          />
         </Examples>
 
         <Footer>
