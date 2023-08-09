@@ -7,6 +7,7 @@ import { useContext } from 'react'
 import ProfileContext from '../contexts/ProfileContext'
 
 import Example from '../components/Example'
+import Footer from '../components/Footer'
 
 const Background = styled.main`
   width: 100%;
@@ -54,12 +55,7 @@ const Examples = styled.section`
   gap: 50px;
 `
 
-const Footer = styled.footer`
-  background: white;
-  width: 100%;
-  border-radius: 20px;
-  padding: 70px;
-`
+
 
 function Home() {
   const { profile } = useContext(ProfileContext)
@@ -80,9 +76,9 @@ function Home() {
 
           <Form />
         </Header>
-
         <Examples>
           <Example
+            id={1}
             name="Evangelina Cabrera"
             avatar="evangelina-cabrera.jpg"
             company="Pink Paper"
@@ -90,6 +86,7 @@ function Home() {
             profile="http://localhost:5173/mwjwvc8"
           />
           <Example
+            id={2}
             name="Wilford Horne"
             avatar="wilford-horne.jpg"
             company="Yellllow"
@@ -97,6 +94,7 @@ function Home() {
             profile="http://localhost:5173/mwjwvc8"
           />
           <Example
+            id={3}
             name="Julius Kopp"
             avatar="julius-kopp.jpg"
             company="Bluesky Logistics"
@@ -105,9 +103,7 @@ function Home() {
           />
         </Examples>
 
-        <Footer>
-          footer info
-        </Footer>
+        <Footer />
       </Container>
     </Background>
   )

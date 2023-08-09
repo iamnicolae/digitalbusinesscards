@@ -40,9 +40,10 @@ const Link = styled.a`
   font-weight: 700;
 `
 
-function Example({ name, avatar, company, position, profile }) {
+function Example({ id, name, avatar, company, position, profile }) {
   return (
     <Container>
+      <p>Example #{id}</p>
       <Avatar src={`/assets/${avatar}`} alt={name} />
       <Name>{name}</Name>
       <Position>{position}</Position>
