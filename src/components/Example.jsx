@@ -6,6 +6,7 @@ const Container = styled.div`
   border-radius: 20px;
   padding: 70px;
   text-align: center;
+  position: relative;
 `
 
 const Avatar = styled.img`
@@ -34,16 +35,30 @@ const Company = styled.h3`
 
 const Link = styled.a`
   display: inline-flex;
-  margin-top: 30px;
+  gap: 5px;
+  border: 2px solid;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 40px;
   text-transform: uppercase;
   font-size: 1.5rem;
   font-weight: 700;
 `
 
+const Number = styled.span`
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  font-style: italic;
+  color: var(--color-darkSecondary);
+  opacity: 0.7;
+  font-size: 1.5rem;
+`
+
 function Example({ id, name, avatar, company, position, profile }) {
   return (
     <Container>
-      <p>Example #{id}</p>
+      <Number>Example #{id}</Number>
       <Avatar src={`/assets/${avatar}`} alt={name} />
       <Name>{name}</Name>
       <Position>{position}</Position>

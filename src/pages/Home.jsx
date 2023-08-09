@@ -40,19 +40,27 @@ const Title = styled.h1`
   text-transform: uppercase;
 `
 
+const Subtitle = styled.p`
+  font-size: 2.2rem;
+  margin-top: 10px;
+`
+
 const Intro = styled.div`
   
 `
 
 const QR = styled.div`
-  text-align: center;
-  margin-top: 20px;
+  margin-top: 35px;
 `
 
 const Examples = styled.section`
   display: flex;
   justify-content: space-between;
   gap: 50px;
+
+  @media only screen and (max-width: 1350px) {
+    flex-direction: column;
+  }
 `
 
 
@@ -66,7 +74,7 @@ function Home() {
         <Header>
           <Intro>
             <Title>Digital QR<br />Business<br />Cards</Title>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias quis perferendis reiciendis, ad in, est praesentium officiis ipsam error repellendus exercitationem deleniti facere neque reprehenderit tempora ut obcaecati? Nemo, placeat!</p>
+            <Subtitle>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias quis perferendis reiciendis</Subtitle>
             <QR>
               <a href={`http://localhost:5173/${profile.slug}`}>
                 <QRCode value={`http://localhost:5173/${profile.slug}`} />
