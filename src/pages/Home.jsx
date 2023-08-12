@@ -11,6 +11,9 @@ import Footer from '../components/Footer'
 
 import { GrDocumentPdf } from 'react-icons/gr'
 
+import generatePDF from '../utils/generatePDF'
+import generatePNG from '../utils/generatePNG'
+
 const Background = styled.main`
   width: 100%;
   padding: 100px 0;
@@ -95,11 +98,11 @@ function Home() {
             <Subtitle>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias quis perferendis reiciendis</Subtitle>
             <QR>
               <a href={`http://localhost:5173/${profile.slug}`}>
-                <QRCode value={`http://localhost:5173/${profile.slug}`} size={200} />
+                <QRCode value={`http://localhost:5173/${profile.slug}`} size={200} id="qrcode" />
               </a>
               <Download>
-                <button><GrDocumentPdf /> Download QR code as PDF</button>
-                <button>Download QR code as PNG</button>
+                <button onClick={generatePDF}><GrDocumentPdf /> Download QR code as PDF</button>
+                <button onClick={generatePNG}>Download QR code as PNG</button>
                 <button>Add QR code to homescreen</button>
               </Download>
             </QR>
