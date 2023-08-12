@@ -179,7 +179,7 @@ const ShowMapButton = styled.button`
 
 function Profile() {
   const { slug } = useParams()
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
   const [user, setUser] = useState({})
   const [userAvatar, setUserAvatar] = useState("")
   const [showMap, setShowMap] = useState(false)

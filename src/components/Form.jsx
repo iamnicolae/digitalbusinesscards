@@ -21,6 +21,10 @@ const FormContainer = styled.form`
 const InputWrap = styled.div`
   display: flex;
   gap: 10px;
+
+  @media only screen and (max-width: 1350px) {
+    flex-direction: column;
+  }
 `
 
 const Button = styled.button`
@@ -199,7 +203,7 @@ function Form() {
           onChange={changeProfile}
           onBlur={validate}
           validation={validation}
-          halfWidth
+          halfwidth="true"
         />
         <Input
           name="country"
@@ -210,7 +214,7 @@ function Form() {
           onChange={changeProfile}
           onBlur={validate}
           validation={validation}
-          halfWidth
+          halfwidth="true"
         />
       </InputWrap>
 
@@ -222,7 +226,7 @@ function Form() {
         onChange={changeProfileImage}
         onBlur={validate}
         validation={validation}
-        fullWidth
+        fullwidth="true"
       />
       <br /><br />
       <Button type="submit">GET QR CODE</Button>

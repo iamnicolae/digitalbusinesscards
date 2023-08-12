@@ -9,6 +9,8 @@ import ProfileContext from '../contexts/ProfileContext'
 import Example from '../components/Example'
 import Footer from '../components/Footer'
 
+import { GrDocumentPdf } from 'react-icons/gr'
+
 const Background = styled.main`
   width: 100%;
   padding: 100px 0;
@@ -25,6 +27,10 @@ const Container = styled.section`
   display: flex;
   flex-direction: column;
   gap: 50px;
+  
+  @media only screen and (max-width: 1350px) {
+    width: 95%;
+  }
 `
 
 const Header = styled.header`
@@ -33,11 +39,20 @@ const Header = styled.header`
   border-radius: 20px;
   display: flex;
   gap: 50px;
+
+  @media only screen and (max-width: 1350px) {
+    flex-direction: column;
+    padding: 40px;
+  }
 `
 
 const Title = styled.h1`
   font-size: 8rem;
   text-transform: uppercase;
+
+  @media only screen and (max-width: 1350px) {
+    font-size: 5rem;
+  }
 `
 
 const Subtitle = styled.p`
@@ -51,6 +66,7 @@ const Intro = styled.div`
 
 const QR = styled.div`
   margin-top: 35px;
+  display: flex;
 `
 
 const Examples = styled.section`
@@ -62,7 +78,9 @@ const Examples = styled.section`
     flex-direction: column;
   }
 `
-
+const Download = styled.div`
+  background: pink;
+`
 
 
 function Home() {
@@ -77,8 +95,13 @@ function Home() {
             <Subtitle>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias quis perferendis reiciendis</Subtitle>
             <QR>
               <a href={`http://localhost:5173/${profile.slug}`}>
-                <QRCode value={`http://localhost:5173/${profile.slug}`} />
+                <QRCode value={`http://localhost:5173/${profile.slug}`} size={200} />
               </a>
+              <Download>
+                <button><GrDocumentPdf /> Download QR code as PDF</button>
+                <button>Download QR code as PNG</button>
+                <button>Add QR code to homescreen</button>
+              </Download>
             </QR>
           </Intro>
 

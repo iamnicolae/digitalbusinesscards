@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { FaFacebook, FaTwitter, FaLinkedin } from 'react-icons/fa'
 
 const Container = styled.footer`
   background: white;
@@ -81,9 +80,9 @@ function Footer() {
           <Link href="mailto:nicolae@nicolae.xyz">Get in touch</Link>
         </Menu>
         <Menu>
-          <Link target="_blank" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fgetqr.cc%2F"><FaTwitter /> Share on Twitter</Link>
-          <Link target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgetqr.cc%2F"><FaFacebook /> Share on Facebook</Link>
-          <Link target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fgetqr.cc%2F"><FaLinkedin /> Share on LinkedIn</Link>
+          <Link target="_blank" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fgetqr.cc%2F">Share on Twitter</Link>
+          <Link target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgetqr.cc%2F">Share on Facebook</Link>
+          <Link target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fgetqr.cc%2F">Share on LinkedIn</Link>
         </Menu>
       </MenuContainer>
     </Container >
