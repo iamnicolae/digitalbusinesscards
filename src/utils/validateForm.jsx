@@ -3,31 +3,31 @@ function validateForm(form) {
   let errors = {}
 
   if (!form.firstName) {
-    errors = { ...errors, firstName: "Please enter a first name." }
+    errors = { ...errors, firstName: "First name required." }
   }
 
   if (!form.lastName) {
-    errors = { ...errors, lastName: "Please enter a last name." }
+    errors = { ...errors, lastName: "Last name required." }
   }
 
   if (!form.mobile) {
-    errors = { ...errors, mobile: "Please enter a phone number." }
+    errors = { ...errors, mobile: "Phone number required." }
   }
 
   if (form.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(form.email)) {
-    errors = { ...errors, email: "Please enter a valid email address." }
+    errors = { ...errors, email: "Invalid email address." }
   }
 
   if (form.website && !form.website.includes('http')) {
-    errors = { ...errors, website: "Please enter a valid website." }
+    errors = { ...errors, website: "Invalid website." }
   }
 
   if (form.avatarImage) {
     const size = form.avatarImage.size / 1024 / 1024;
     if (size > 2) {
-      errors = { ...errors, avatarImage: "Please choose a photo under 2MB in size." }
+      errors = { ...errors, avatarImage: "Photo must be under 2MB in size." }
     } else if (!["jpg", "jpeg", "png"].includes(form.avatarImage.name.split('.').pop())) {
-      errors = { ...errors, avatarImage: "Please make sure your photo has a valid extension." }
+      errors = { ...errors, avatarImage: "Invalid photo extension." }
     }
   }
 

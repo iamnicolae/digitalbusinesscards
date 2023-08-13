@@ -13,8 +13,12 @@ import getFileExtension from "../utils/getFileExtension"
 import ProfileContext from "../contexts/ProfileContext"
 import { styled } from "styled-components"
 
+import FormErrors from "./FormErrors"
+
+import { MainButton } from "../styles/button"
+
 const FormContainer = styled.form`
-  //background: lightgreen;
+  background: lightgreen;
 
 `
 
@@ -27,26 +31,6 @@ const InputWrap = styled.div`
   }
 `
 
-const Button = styled.button`
-  background: #695BD7;
-  color: #fff;
-  border-radius: 30px;
-  text-transform: uppercase;
-  font-weight: 700;
-  font-size: 1.5rem;
-  padding: 20px;
-  align-self: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  line-height: 0;
-
-  svg {
-    font-size: 1.7rem;
-  }
-`
-
 function Form() {
 
   const { profile, changeProfile, changeProfileImage } = useContext(ProfileContext)
@@ -56,6 +40,7 @@ function Form() {
 
   const validate = (e) => {
     const errors = validateForm(profile)
+    console.log(errors)
     setValidation({ [e.target.name]: errors[e.target.name] })
   }
 
@@ -90,6 +75,8 @@ function Form() {
   return (
     <FormContainer onSubmit={submit}>
 
+      {Object.keys(validation).length != 0 && <FormErrors validation={validation} />}
+
       <InputWrap>
         <Input
           name="firstName"
@@ -99,7 +86,6 @@ function Form() {
           value={profile.firstName}
           onChange={changeProfile}
           onBlur={validate}
-          validation={validation}
         />
         <Input
           name="lastName"
@@ -109,7 +95,6 @@ function Form() {
           value={profile.lastName}
           onChange={changeProfile}
           onBlur={validate}
-          validation={validation}
         />
       </InputWrap>
 
@@ -122,7 +107,6 @@ function Form() {
           value={profile.mobile}
           onChange={changeProfile}
           onBlur={validate}
-          validation={validation}
         />
         <Input
           name="phone"
@@ -131,8 +115,6 @@ function Form() {
           placeholder="e.g. (000) 1234 4321"
           value={profile.phone}
           onChange={changeProfile}
-          onBlur={validate}
-          validation={validation}
         />
       </InputWrap>
 
@@ -144,8 +126,6 @@ function Form() {
           placeholder="e.g. TheCompany"
           value={profile.company}
           onChange={changeProfile}
-          onBlur={validate}
-          validation={validation}
         />
         <Input
           name="position"
@@ -154,8 +134,6 @@ function Form() {
           placeholder="e.g. Technical Director"
           value={profile.position}
           onChange={changeProfile}
-          onBlur={validate}
-          validation={validation}
         />
       </InputWrap>
 
@@ -168,7 +146,6 @@ function Form() {
           value={profile.email}
           onChange={changeProfile}
           onBlur={validate}
-          validation={validation}
         />
 
         <Input
@@ -179,7 +156,6 @@ function Form() {
           value={profile.website}
           onChange={changeProfile}
           onBlur={validate}
-          validation={validation}
         />
       </InputWrap>
 
@@ -191,8 +167,6 @@ function Form() {
           placeholder="e.g. 199 Bourke Avenue"
           value={profile.street}
           onChange={changeProfile}
-          onBlur={validate}
-          validation={validation}
         />
         <Input
           name="city"
@@ -201,9 +175,7 @@ function Form() {
           placeholder="e.g. Berlin"
           value={profile.city}
           onChange={changeProfile}
-          onBlur={validate}
-          validation={validation}
-          halfwidth="true"
+          $halfwidth="true"
         />
         <Input
           name="country"
@@ -212,9 +184,7 @@ function Form() {
           placeholder="e.g. Spain"
           value={profile.country}
           onChange={changeProfile}
-          onBlur={validate}
-          validation={validation}
-          halfwidth="true"
+          $halfwidth="true"
         />
       </InputWrap>
 
@@ -225,11 +195,10 @@ function Form() {
         label="Avatar"
         onChange={changeProfileImage}
         onBlur={validate}
-        validation={validation}
-        fullwidth="true"
+        $fullwidth="true"
       />
       <br /><br />
-      <Button type="submit">GET QR CODE</Button>
+      <MainButton type="submit">GET QR CODE</MainButton>
     </FormContainer>
   )
 }

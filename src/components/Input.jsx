@@ -9,14 +9,14 @@ const InputContainer = styled.input`
   border: 1px solid #d0d0e1;
   font-size: 1.5rem;
   width: 300px;
-  ${props => props.fullwidth && css`
+  ${props => props.$fullwidth && css`
     width: 610px;
     
     @media only screen and (max-width: 1350px) {
       width: 300px;
     }
   `}
-  ${props => props.halfwidth && css`
+  ${props => props.$halfwidth && css`
     width: 145px;
     
     @media only screen and (max-width: 1350px) {
@@ -33,11 +33,10 @@ const Label = styled.label`
   color: #4d4d4d;
 `
 
-function Input({ label, validation, name, ...props }) {
+function Input({ label, name, ...props }) {
   return (
     <InputWrap>
       <Label htmlFor={name}>{label}</Label>
-      <div>{validation[name]}</div>
       <InputContainer
         name={name}
         id={name}

@@ -63,7 +63,7 @@ function Example({ id, name, avatar, company, position, profile }) {
       <Name>{name}</Name>
       <Position>{position}</Position>
       <Company>{company}</Company>
-      <Link href={profile}>View card</Link>
+      <Link href={profile}>View profile</Link>
     </Container>
   )
 }
