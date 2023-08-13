@@ -1,7 +1,8 @@
+import { useEffect } from 'react';
 import styled from 'styled-components'
 
 import Form from '../components/Form'
-import QRCode from 'react-qr-code'
+
 
 import { useContext } from 'react'
 import ProfileContext from '../contexts/ProfileContext'
@@ -9,10 +10,9 @@ import ProfileContext from '../contexts/ProfileContext'
 import Example from '../components/Example'
 import Footer from '../components/Footer'
 
-import { GrDocumentPdf } from 'react-icons/gr'
 
-import generatePDF from '../utils/generatePDF'
-import generatePNG from '../utils/generatePNG'
+import Download from '../components/Download';
+
 
 const Background = styled.main`
   width: 100%;
@@ -67,11 +67,6 @@ const Intro = styled.div`
   
 `
 
-const QR = styled.div`
-  margin-top: 35px;
-  display: flex;
-`
-
 const Examples = styled.section`
   display: flex;
   justify-content: space-between;
@@ -81,9 +76,7 @@ const Examples = styled.section`
     flex-direction: column;
   }
 `
-const Download = styled.div`
-  background: pink;
-`
+
 
 
 function Home() {
@@ -96,16 +89,7 @@ function Home() {
           <Intro>
             <Title>Digital QR<br />Business<br />Cards</Title>
             <Subtitle>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias quis perferendis reiciendis</Subtitle>
-            <QR>
-              <a href={`http://localhost:5173/${profile.slug}`}>
-                <QRCode value={`http://localhost:5173/${profile.slug}`} size={200} id="qrcode" />
-              </a>
-              <Download>
-                <button onClick={generatePDF}><GrDocumentPdf /> Download QR code as PDF</button>
-                <button onClick={generatePNG}>Download QR code as PNG</button>
-                <button>Add QR code to homescreen</button>
-              </Download>
-            </QR>
+            <Download profile={profile} />
           </Intro>
 
           <Form />
