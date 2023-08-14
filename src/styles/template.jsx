@@ -22,3 +22,14 @@ export const Container = styled.section`
     width: 95%;
   }
 `
+
+export const Section = styled.section`
+  background: white;
+  padding: 70px;
+  border-radius: 20px;
+`
+
+export const PageTitle = styled.h1`
+  font-size: 2.8rem;
+  text-transform: uppercase;
+`
