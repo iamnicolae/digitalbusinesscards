@@ -33,7 +33,7 @@ const InputWrap = styled.div`
 
 function Form() {
 
-  const { profile, changeProfile, changeProfileImage } = useContext(ProfileContext)
+  const { profile, changeProfile, changeProfileImage, profileSubmitted, setProfileSubmitted } = useContext(ProfileContext)
 
   const [validation, setValidation] = useState({})
   const profilesCollection = collection(db, "profiles")
@@ -54,11 +54,13 @@ function Form() {
 
       if (avatarImage === null) {
         await addDoc(profilesCollection, { ...profileData, avatar: "" })
+        setProfileSubmitted(true)
       } else {
         const avatarFilename = `${generateUniqueId("image", 20)()}.${getFileExtension(avatarImage)}`
         const image = ref(storage, `avatars/${avatarFilename}`)
         uploadBytes(image, avatarImage).then(async () => {
           await addDoc(profilesCollection, { ...profileData, avatar: avatarFilename })
+          setProfileSubmitted(true)
           alert("image up")
         })
       }
@@ -199,6 +201,7 @@ function Form() {
       />
       <br /><br />
       <MainButton type="submit">GET QR CODE</MainButton>
+      {profileSubmitted && <p>hey check the profile and edit now while this page still open, because after you close this page you cannot edit anymore</p>}
     </FormContainer>
   )
 }

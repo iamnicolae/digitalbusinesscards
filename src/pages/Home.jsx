@@ -80,7 +80,7 @@ const Examples = styled.section`
 
 
 function Home() {
-  const { profile } = useContext(ProfileContext)
+  const { profile, profileSubmitted } = useContext(ProfileContext)
 
   return (
     <Background>
@@ -89,7 +89,7 @@ function Home() {
           <Intro>
             <Title>Digital QR<br />Business<br />Cards</Title>
             <Subtitle>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias quis perferendis reiciendis</Subtitle>
-            <Download profile={profile} />
+            <Download profile={profile} profileSubmitted={profileSubmitted} />
           </Intro>
 
           <Form />

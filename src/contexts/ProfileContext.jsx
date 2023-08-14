@@ -4,6 +4,7 @@ import generateUniqueId from "../utils/generateUniqueId"
 const ProfileContext = createContext()
 
 export function ProfileProvider({ children }) {
+  const [profileSubmitted, setProfileSubmitted] = useState(false)
   const [profile, setProfile] = useState({
     firstName: "",
     lastName: "",
@@ -31,7 +32,7 @@ export function ProfileProvider({ children }) {
   }
 
   return (
-    <ProfileContext.Provider value={{ profile, changeProfile, changeProfileImage }}>
+    <ProfileContext.Provider value={{ profile, changeProfile, changeProfileImage, profileSubmitted, setProfileSubmitted }}>
       {children}
     </ProfileContext.Provider>
   )
