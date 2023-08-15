@@ -17,7 +17,7 @@ import { FiMapPin } from 'react-icons/fi'
 import { BiPhone, BiSolidPhoneCall } from 'react-icons/bi'
 import { RiCellphoneLine, RiSendPlaneFill } from 'react-icons/ri'
 import { FaUserPlus } from 'react-icons/fa'
-import { BsGlobeAmericas } from 'react-icons/bs'
+import { BsGlobeAmericas, BsQrCodeScan } from 'react-icons/bs'
 import generateAvatar from "../utils/generateAvatar"
 import generateVCard from "../utils/generateVCard"
 
@@ -177,12 +177,29 @@ const ShowMapButton = styled.button`
   right: 20px; */
 `
 
+const QRContent = styled.div`
+  background: pink;
+  width: 100%;
+  height: 50vh;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+`
+
+const QRbutton = styled.button`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 3.5rem;
+`
+
 function Profile() {
   const { slug } = useParams()
   const [isLoading, setIsLoading] = useState(false)
   const [user, setUser] = useState({})
   const [userAvatar, setUserAvatar] = useState("")
   const [showMap, setShowMap] = useState(false)
+  const [showQR, setShowQR] = useState(false)
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -291,6 +308,14 @@ function Profile() {
           </Field>}
 
           <Download onClick={() => generateVCard(user, userAvatar)}><FaUserPlus /> Download vCard</Download>
+
+
+          <QRbutton onClick={() => setShowQR(!showQR)}><BsQrCodeScan /></QRbutton>
+
+
+          {showQR && <QRContent>
+            qr code content
+          </QRContent>}
 
         </Container>
       }
