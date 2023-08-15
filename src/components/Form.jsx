@@ -31,11 +31,17 @@ const InputWrap = styled.div`
   }
 `
 
+const Loading = styled.span`
+  position: absolute;
+  background: red;
+`
+
 function Form() {
 
   const { profile, changeProfile, changeProfileImage, profileSubmitted, setProfileSubmitted } = useContext(ProfileContext)
 
   const [validation, setValidation] = useState({})
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const profilesCollection = collection(db, "profiles")
 
   const validate = (e) => {
@@ -45,7 +51,8 @@ function Form() {
   }
 
   const submit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
+    setIsSubmitting(true)
 
     const errors = validateForm(profile)
 
@@ -55,12 +62,14 @@ function Form() {
       if (avatarImage === null) {
         await addDoc(profilesCollection, { ...profileData, avatar: "" })
         setProfileSubmitted(true)
+        setIsSubmitting(false)
       } else {
         const avatarFilename = `${generateUniqueId("image", 20)()}.${getFileExtension(avatarImage)}`
         const image = ref(storage, `avatars/${avatarFilename}`)
         uploadBytes(image, avatarImage).then(async () => {
           await addDoc(profilesCollection, { ...profileData, avatar: avatarFilename })
           setProfileSubmitted(true)
+          setIsSubmitting(false)
           alert("image up")
         })
       }
@@ -69,6 +78,7 @@ function Form() {
 
     } else {
       setValidation({ ...errors })
+      setIsSubmitting(false)
       return
     }
 
@@ -76,7 +86,7 @@ function Form() {
 
   return (
     <FormContainer onSubmit={submit}>
-
+      {isSubmitting ? <Loading>loading..............</Loading> : null}
       {Object.keys(validation).length != 0 && <FormErrors validation={validation} />}
 
       <InputWrap>
@@ -200,7 +210,7 @@ function Form() {
         $fullwidth="true"
       />
       <br /><br />
-      <MainButton type="submit">GET QR CODE</MainButton>
+      <MainButton type="submit" disabled={isSubmitting}>GET QR CODE</MainButton>
       {profileSubmitted && <p>hey check the profile and edit now while this page still open, because after you close this page you cannot edit anymore</p>}
     </FormContainer>
   )
