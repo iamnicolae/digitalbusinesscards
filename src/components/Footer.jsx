@@ -65,11 +65,17 @@ const Link = styled.a`
   }
 `
 
+const Lo = styled.img`
+  max-width: 90px;
+  height: auto;
+`
+
 function Footer() {
   return (
     <Container>
       <div>
-        <Logo>getqr.cc</Logo>
+        {/* <Logo>GetQR</Logo> */}
+        <Lo src="/assets/getqr-logo-light.png" alt="" />
         <Copyright>{new Date().getFullYear()}</Copyright>
         <Notice>This website uses cookies.</Notice>
       </div>

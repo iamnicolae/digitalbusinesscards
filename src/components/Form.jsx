@@ -17,9 +17,10 @@ import FormErrors from "./FormErrors"
 
 import { MainButton } from "../styles/button"
 
-const FormContainer = styled.form`
-  background: lightgreen;
+import Loading from "./Loading"
 
+const FormContainer = styled.form`
+  position: relative;
 `
 
 const InputWrap = styled.div`
@@ -29,11 +30,6 @@ const InputWrap = styled.div`
   @media only screen and (max-width: 1350px) {
     flex-direction: column;
   }
-`
-
-const Loading = styled.span`
-  position: absolute;
-  background: red;
 `
 
 function Form() {
@@ -86,7 +82,7 @@ function Form() {
 
   return (
     <FormContainer onSubmit={submit}>
-      {isSubmitting ? <Loading>loading..............</Loading> : null}
+      {isSubmitting ? <Loading /> : null}
       {Object.keys(validation).length != 0 && <FormErrors validation={validation} />}
 
       <InputWrap>
