@@ -23,6 +23,20 @@ const FormContainer = styled.form`
   position: relative;
 `
 
+const FormFooter = styled.div`
+  margin-top: 20px;
+  gap: 30px;
+  align-items: center;
+  width: 100%;
+
+  p {
+    max-width: 400px;
+    font-size: 1.5rem;
+    font-style: italic;
+    color: #695BD7;
+  }
+`
+
 const InputWrap = styled.div`
   display: flex;
   gap: 10px;
@@ -205,9 +219,11 @@ function Form() {
         onBlur={validate}
         $fullwidth="true"
       />
-      <br /><br />
-      <MainButton type="submit" disabled={isSubmitting}>GET QR CODE</MainButton>
-      {profileSubmitted && <p>hey check the profile and edit now while this page still open, because after you close this page you cannot edit anymore</p>}
+      <FormFooter>
+        <MainButton type="submit" disabled={isSubmitting}>{profileSubmitted ? 'UPDATE PROFILE' : 'GET QR CODE'}</MainButton>
+        {profileSubmitted && <p>You can still make updates while this page is still open, after you close this page you cannot edit your profile anymore.</p>}
+      </FormFooter>
+
     </FormContainer>
   )
 }
