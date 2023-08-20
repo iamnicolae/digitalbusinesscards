@@ -8,6 +8,10 @@ export const Background = styled.main`
   background-size: cover;
   background-position: bottom left;
   background-attachment: fixed;
+
+  @media only screen and (max-width: 750px) {
+    padding: 50px 0;
+  }
 `
 
 export const Container = styled.section`
@@ -18,15 +22,19 @@ export const Container = styled.section`
   flex-direction: column;
   gap: 50px;
   
-  @media only screen and (max-width: 1350px) {
+  @media only screen and (max-width: 750px) {
     width: 95%;
   }
 `
 
 export const Section = styled.section`
-  background: white;
+  background: #fff;
   padding: 70px;
   border-radius: 20px;
+
+  @media only screen and (max-width: 750px) {
+    padding: 30px;
+  }
 `
 
 export const PageTitle = styled.h1`

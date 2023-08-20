@@ -11,7 +11,7 @@ import generateUniqueId from "../utils/generateUniqueId"
 import getFileExtension from "../utils/getFileExtension"
 
 import ProfileContext from "../contexts/ProfileContext"
-import { styled } from "styled-components"
+import { styled, css } from "styled-components"
 
 import FormErrors from "./FormErrors"
 
@@ -21,10 +21,16 @@ import Loading from "./Loading"
 
 const FormContainer = styled.form`
   position: relative;
+  grid-area: 1 / 2 / 3 / 3;
+
+  @media only screen and (max-width: 750px) {
+    grid-area: 2 / 1 / 3 / 2;
+  }
 `
 
 const FormFooter = styled.div`
   margin-top: 20px;
+  display: flex;
   gap: 30px;
   align-items: center;
   width: 100%;
@@ -35,14 +41,28 @@ const FormFooter = styled.div`
     font-style: italic;
     color: #695BD7;
   }
+
+  @media only screen and (max-width: 750px) {
+    display: block;
+
+    p {
+      margin-top: 10px;
+    }
+  }
 `
 
 const InputWrap = styled.div`
   display: flex;
   gap: 10px;
 
-  @media only screen and (max-width: 1350px) {
-    flex-direction: column;
+  @media only screen and (max-width: 750px) {
+    ${props => props.$email && css`
+    display: block;
+  `}
+
+  ${props => props.$street && css`
+    display: block;
+  `}
   }
 `
 
@@ -159,7 +179,7 @@ function Form() {
         />
       </InputWrap>
 
-      <InputWrap>
+      <InputWrap $email="true">
         <Input
           name="email"
           type="text"
@@ -181,7 +201,7 @@ function Form() {
         />
       </InputWrap>
 
-      <InputWrap>
+      <InputWrap $street="true">
         <Input
           name="street"
           type="text"
@@ -190,24 +210,26 @@ function Form() {
           value={profile.street}
           onChange={changeProfile}
         />
-        <Input
-          name="city"
-          type="text"
-          label="City"
-          placeholder="e.g. Berlin"
-          value={profile.city}
-          onChange={changeProfile}
-          $halfwidth="true"
-        />
-        <Input
-          name="country"
-          type="text"
-          label="Country"
-          placeholder="e.g. Spain"
-          value={profile.country}
-          onChange={changeProfile}
-          $halfwidth="true"
-        />
+        <InputWrap>
+          <Input
+            name="city"
+            type="text"
+            label="City"
+            placeholder="e.g. Berlin"
+            value={profile.city}
+            onChange={changeProfile}
+            $halfwidth="true"
+          />
+          <Input
+            name="country"
+            type="text"
+            label="Country"
+            placeholder="e.g. Spain"
+            value={profile.country}
+            onChange={changeProfile}
+            $halfwidth="true"
+          />
+        </InputWrap>
       </InputWrap>
 
       <Input

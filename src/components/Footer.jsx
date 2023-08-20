@@ -12,25 +12,22 @@ const Container = styled.footer`
   @media only screen and (max-width: 780px) {
     flex-direction: column;
     gap: 50px;
+    padding: 30px;
   }
-`
-
-const Logo = styled.p`
-  font-size: 2.2rem;
-  font-weight: 700;
-  letter-spacing: 1px;
 `
 
 const Copyright = styled.span`
   font-weight: 700;
   font-size: 1.5rem;
-  margin-top: 15px;
-  display: block;
+  //margin-top: 5px;
+  display: inline-block;
 `
 
 const Notice = styled.p`
   font-size: 1.3rem;
-  margin-top: 5px;
+  font-weight: normal;
+  //margin-top: 5px;
+  display: inline-block;
 `
 
 const MenuContainer = styled.div`
@@ -38,9 +35,9 @@ const MenuContainer = styled.div`
   gap: 50px;
 
   @media only screen and (max-width: 780px) {
-    flex-direction: column;
+    //flex-direction: column;
     order: -1;
-    gap: 30px;
+    //gap: 15px;
   }
 `
 
@@ -65,20 +62,30 @@ const Link = styled.a`
   }
 `
 
-const Lo = styled.img`
+const LogoContainer = styled.div`
+  /* display: flex;
+  align-items: center;
+  gap: 10px; */
+  @media only screen and (max-width: 780px) {
+    width: 100%;
+  }
+`
+
+const Logo = styled.img`
+  display: block;
   max-width: 90px;
+  width: 100%;
   height: auto;
+  margin-bottom: 5px;
 `
 
 function Footer() {
   return (
     <Container>
-      <div>
-        {/* <Logo>GetQR</Logo> */}
-        <Lo src="/assets/getqr-logo-light.png" alt="" />
-        <Copyright>{new Date().getFullYear()}</Copyright>
-        <Notice>This website uses cookies.</Notice>
-      </div>
+      <LogoContainer>
+        <Logo src="/assets/getqr-logo-light.png" alt="" />
+        <Copyright>&copy;{new Date().getFullYear()} <Notice>This website uses cookies</Notice></Copyright>
+      </LogoContainer>
       <MenuContainer>
         <Menu>
           <Link href="https://getqr.cc/pro">TRY Pro <span>(Coming soon)</span></Link>

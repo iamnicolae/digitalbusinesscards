@@ -10,15 +10,16 @@ import generatePNG from '../utils/generatePNG'
 import { MinimalButton } from '../styles/button';
 
 const Container = styled.div`
-  margin-top: 35px;
   display: flex;
+  gap: 30px;
   position: relative;
+  grid-area: 2 / 1 / 3 / 2;
   
   &:after {
     content: "";
     display: block;
-    width: 500px;
-    height: 200px;
+    width: 100%;
+    height: 100%;
     background: linear-gradient(90deg, rgba(255,255,255,0.95) 15%, transparent);
     position: absolute;
     cursor: not-allowed;
@@ -30,6 +31,15 @@ const Container = styled.div`
       cursor: normal;
     }
   `}
+
+  a {
+    display: block;
+  }
+
+  @media only screen and (max-width: 750px) {
+    grid-area: 3 / 1 / 4 / 2;
+    flex-direction: column;
+  }
 `
 
 const Actions = styled.div`
@@ -38,13 +48,16 @@ const Actions = styled.div`
   flex-direction: column;
   justify-content: center;
   gap: 15px;
-  margin-left: 30px;
+
+  @media only screen and (max-width: 1350px) {
+
+  }
 `
 
 function Download({ profile, profileSubmitted }) {
   return (
     <Container $profileSubmitted={profileSubmitted}>
-      <a href={`http://localhost:5173/${profile.slug}`}>
+      <a href={`http://localhost:5173/${profile.slug}`} target="_blank">
         <QRCode value={`http://localhost:5173/${profile.slug}`} size={200} id="qrcode" />
       </a>
       <Actions>

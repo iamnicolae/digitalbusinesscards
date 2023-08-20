@@ -7,6 +7,10 @@ const Container = styled.div`
   padding: 70px;
   text-align: center;
   position: relative;
+
+  @media only screen and (max-width: 750px) {
+    padding: 30px;
+  }
 `
 
 const Avatar = styled.img`
