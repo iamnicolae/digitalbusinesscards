@@ -74,7 +74,7 @@ function Profile() {
         <Container>
           <ProfileHeader user={user} userAvatar={userAvatar} />
           <ProfileFields user={user} userAvatar={userAvatar} />
-          <ProfileQR />
+          <ProfileQR user={user} />
         </Container>
       }
     </Background>

@@ -1,5 +1,4 @@
 import { styled, css } from 'styled-components'
-import QRCode from 'react-qr-code'
 
 import { GrDocumentPdf, GrDocumentImage } from 'react-icons/gr'
 import { MdAddToHomeScreen } from 'react-icons/md'
@@ -8,6 +7,7 @@ import generatePDF from '../utils/generatePDF'
 import generatePNG from '../utils/generatePNG'
 
 import { MinimalButton } from '../styles/button';
+import QR from './QR'
 
 const Container = styled.div`
   display: flex;
@@ -57,9 +57,7 @@ const Actions = styled.div`
 function Download({ profile, profileSubmitted }) {
   return (
     <Container $profileSubmitted={profileSubmitted}>
-      <a href={`http://localhost:5173/${profile.slug}`} target="_blank">
-        <QRCode value={`http://localhost:5173/${profile.slug}`} size={200} id="qrcode" />
-      </a>
+      <QR slug={profile.slug} />
       <Actions>
         <MinimalButton onClick={generatePDF}><GrDocumentPdf /> <span>Download QR code as PDF</span></MinimalButton>
         <MinimalButton onClick={generatePNG}><GrDocumentImage /> <span>Download QR code as PNG</span></MinimalButton>

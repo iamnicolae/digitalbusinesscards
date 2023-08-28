@@ -98,6 +98,10 @@ const GlobalStyle = createGlobalStyle`
     background: var(--color-lightPrimary);
   }
 
+  body:has(.requires-no-scroll) {
+    overflow: hidden;
+  }
+
   body, 
   button,
   input,
