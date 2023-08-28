@@ -1,5 +1,5 @@
 import { styled } from 'styled-components'
-import { Background, Container, Section } from '../styles/template'
+import { Background, Container } from '../styles/template'
 
 const Title = styled.h1`
   color: white;
