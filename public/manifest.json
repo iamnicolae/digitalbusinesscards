@@ -1,7 +1,12 @@
 {
   "name": "My PWA",
+  "short_name": "VV",
   "display": "standalone",
   "scope": "/",
+  "start_url": "/",
+  "background_color": "#5d54a4",
+  "theme_color": "#5d54a4",
+  "description": "Curs valutar banci Romania. Vezi cursul de schimb valutar de la casele de schimb a celor mai importante banci din Romania. Cursul este actualizat la 10 minute.",
   "icons": [
     {
       "src": "assets/julius-kopp.jpg",

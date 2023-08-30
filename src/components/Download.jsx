@@ -55,17 +55,21 @@ function Download({ profile, profileSubmitted }) {
   let deferredPrompt;
 
   window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
     deferredPrompt = e;
   });
 
   const showInstallButton = async () => {
-    if (deferredPrompt !== null) {
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      if (outcome === 'accepted') {
-        deferredPrompt = null;
-      }
-    }
+
+    deferredPrompt.prompt();
+
+    // if (deferredPrompt !== null) {
+    //   deferredPrompt.prompt();
+    //   const { outcome } = await deferredPrompt.userChoice;
+    //   if (outcome === 'accepted') {
+    //     deferredPrompt = null;
+    //   }
+    // }
   }
 
   return (
