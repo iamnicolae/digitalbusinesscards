@@ -51,13 +51,30 @@ const Actions = styled.div`
 `
 
 function Download({ profile, profileSubmitted }) {
+
+  let deferredPrompt;
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    deferredPrompt = e;
+  });
+
+  const showInstallButton = async () => {
+    if (deferredPrompt !== null) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        deferredPrompt = null;
+      }
+    }
+  }
+
   return (
     <Container $profileSubmitted={profileSubmitted}>
       <QR slug={profile.slug} />
       <Actions>
         <MinimalButton onClick={generatePDF}><GrDocumentPdf /> <span>Download QR code as PDF</span></MinimalButton>
         <MinimalButton onClick={generatePNG}><GrDocumentImage /> <span>Download QR code as PNG</span></MinimalButton>
-        <MinimalButton><MdAddToHomeScreen /> <span>Add QR code to home screen</span></MinimalButton>
+        <MinimalButton onClick={showInstallButton}><MdAddToHomeScreen /> <span>Add QR code to home screen</span></MinimalButton>
       </Actions>
     </Container>
   )
