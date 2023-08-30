@@ -9,9 +9,14 @@
   "description": "Curs valutar banci Romania. Vezi cursul de schimb valutar de la casele de schimb a celor mai importante banci din Romania. Cursul este actualizat la 10 minute.",
   "icons": [
     {
-      "src": "assets/julius-kopp.jpg",
-      "type": "image/jpeg",
-      "sizes": "250x250"
+      "src": "/assets/icon_192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/assets/icon_512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ]
 }
