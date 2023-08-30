@@ -9,6 +9,8 @@ import generatePDF from '../utils/generatePDF'
 import generatePNG from '../utils/generatePNG'
 import QR from './QR'
 
+import { useEffect, useState } from 'react'
+
 const Container = styled.div`
   display: flex;
   gap: 30px;
@@ -52,12 +54,20 @@ const Actions = styled.div`
 
 function Download({ profile, profileSubmitted }) {
 
-  let deferredPrompt;
+  const [deferredPrompt, setDeferredPrompt] = useState(null)
 
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-  });
+
+  useEffect(() => {
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    });
+  }, [])
+
+  // window.addEventListener('beforeinstallprompt', (e) => {
+  //   e.preventDefault();
+  //   deferredPrompt = e;
+  // });
 
   const showInstallButton = async () => {
 
