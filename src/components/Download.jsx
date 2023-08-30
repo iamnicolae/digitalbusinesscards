@@ -61,15 +61,15 @@ function Download({ profile, profileSubmitted }) {
 
   const showInstallButton = async () => {
 
-    deferredPrompt.prompt();
+    //deferredPrompt.prompt();
 
-    // if (deferredPrompt !== null) {
-    //   deferredPrompt.prompt();
-    //   const { outcome } = await deferredPrompt.userChoice;
-    //   if (outcome === 'accepted') {
-    //     deferredPrompt = null;
-    //   }
-    // }
+    if (deferredPrompt !== null) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        deferredPrompt = null;
+      }
+    }
   }
 
   return (
