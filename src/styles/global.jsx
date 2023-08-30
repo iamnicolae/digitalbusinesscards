@@ -51,15 +51,14 @@ const GlobalStyle = createGlobalStyle`
   /* Variables */
     :root {
     --font: 'Jost', sans-serif;
-    //--font2: 'Abril Fatface', cursive;
-    --color-primary: #4e00ff;
+    --color-primary: #695BD7;
     --color-secondary: #e52e2e;
     --color-lightPrimary: #ffffff;
     --color-lightSecondary: #d0d0e1;
     --color-darkPrimary: #222222;
     --color-darkSecondary: #2e2e2e;
-    --color-darkTertiary: #1a1a1a;
-    --color-accent: #201e24;
+    --color-darkTertiary: #4d4d4d;
+    --color-accent: #ffc72e;
   }
 	
   /* General Styles */

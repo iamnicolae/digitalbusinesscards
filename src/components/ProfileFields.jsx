@@ -21,7 +21,7 @@ const Fields = styled.div`
 
 const Field = styled.div`
   width: 100%;
-  background: white;
+  background: var(--color-lightPrimary);
   padding: 20px;
   border-radius: 20px;
   box-shadow: rgba(10, 11, 13, 0.025) 0px 1px 2px 0px;
@@ -34,7 +34,7 @@ const Label = styled.span`
   gap: 3px;
   font-size: 1.3rem;
   font-weight: 700;
-  color: #4d4d4d;
+  color: var(--color-darkTertiary);
   margin-bottom: 20px;
 
   svg {

@@ -5,7 +5,7 @@ import { BsQrCodeScan } from 'react-icons/bs'
 import QR from "./QR"
 
 const QRContent = styled.div`
-  background: linear-gradient(0deg, white, 80%, transparent);
+  background: linear-gradient(0deg, #fff, 80%, transparent);
   width: 100%;
   height: 100vh;
   position: fixed;

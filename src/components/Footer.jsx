@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const Container = styled.footer`
-  background: white;
+  background: var(--color-lightPrimary);
   width: 100%;
   border-radius: 20px;
   padding: 70px;
@@ -19,14 +19,12 @@ const Container = styled.footer`
 const Copyright = styled.span`
   font-weight: 700;
   font-size: 1.5rem;
-  //margin-top: 5px;
   display: inline-block;
 `
 
 const Notice = styled.p`
   font-size: 1.3rem;
   font-weight: normal;
-  //margin-top: 5px;
   display: inline-block;
 `
 
@@ -34,10 +32,8 @@ const MenuContainer = styled.div`
   display: flex;
   gap: 50px;
 
-  @media only screen and (max-width: 780px) {
-    //flex-direction: column;
+  @media only screen and (max-width: 750px) {
     order: -1;
-    //gap: 15px;
   }
 `
 
@@ -56,17 +52,10 @@ const Link = styled.a`
     font-size: 1.2rem;
     font-style: italic;
   }
-
-  svg {
-   
-  }
 `
 
 const LogoContainer = styled.div`
-  /* display: flex;
-  align-items: center;
-  gap: 10px; */
-  @media only screen and (max-width: 780px) {
+  @media only screen and (max-width: 750px) {
     width: 100%;
   }
 `

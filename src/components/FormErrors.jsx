@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 const Errors = styled.div`
-  background: #ffc72e;
-  color: #382900;
+  background: var(--color-accent);
+  color: var(--color-darkPrimary);
   border-radius: 20px;
   font-style: italic;
   position: fixed;

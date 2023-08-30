@@ -10,7 +10,7 @@ const InputWrap = styled.div`
 
 const InputContainer = styled.input`
   padding: 12px 15px;
-  border: 1px solid #d0d0e1;
+  border: 1px solid var(--color-lightSecondary);
   font-size: 1.5rem;
   width: 300px;
   
@@ -41,7 +41,7 @@ const Label = styled.label`
   font-weight: 700;
   margin-bottom: 5px;
   display: block;
-  color: #4d4d4d;
+  color: var(--color-darkTertiary);
 
   @media only screen and (max-width: 750px) {
     font-size: 1.5rem;

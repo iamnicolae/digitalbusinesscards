@@ -16,7 +16,7 @@ const Container = styled.span`
     font-weight: 700;
     font-size: 1.3rem;
     text-transform: uppercase;
-    color: #695bd7;
+    color: var(--color-primary);
     margin-top: -15px;
   }
 

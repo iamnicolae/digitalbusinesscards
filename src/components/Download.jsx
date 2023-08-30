@@ -3,10 +3,10 @@ import { styled, css } from 'styled-components'
 import { GrDocumentPdf, GrDocumentImage } from 'react-icons/gr'
 import { MdAddToHomeScreen } from 'react-icons/md'
 
+import { MinimalButton } from '../styles/button'
+
 import generatePDF from '../utils/generatePDF'
 import generatePNG from '../utils/generatePNG'
-
-import { MinimalButton } from '../styles/button';
 import QR from './QR'
 
 const Container = styled.div`
@@ -48,10 +48,6 @@ const Actions = styled.div`
   flex-direction: column;
   justify-content: center;
   gap: 15px;
-
-  @media only screen and (max-width: 1350px) {
-
-  }
 `
 
 function Download({ profile, profileSubmitted }) {

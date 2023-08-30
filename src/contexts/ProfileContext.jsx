@@ -4,7 +4,7 @@ import generateUniqueId from "../utils/generateUniqueId"
 const ProfileContext = createContext()
 
 export function ProfileProvider({ children }) {
-  const [profileSubmitted, setProfileSubmitted] = useState(true)
+  const [profileSubmitted, setProfileSubmitted] = useState(false)
   const [profile, setProfile] = useState({
     firstName: "",
     lastName: "",

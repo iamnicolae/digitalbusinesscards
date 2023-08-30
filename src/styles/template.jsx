@@ -28,7 +28,7 @@ export const Container = styled.section`
 `
 
 export const Section = styled.section`
-  background: #fff;
+  background: var(--color-lightPrimary);
   padding: 70px;
   border-radius: 20px;
 

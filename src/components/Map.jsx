@@ -1,11 +1,7 @@
-import { useRef, useEffect, useState, useCallback } from "react"
+import { useRef, useEffect, useState } from "react"
 import { styled } from "styled-components"
 import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
-import mbxGeocoding from '@mapbox/mapbox-sdk/services/geocoding';
-// import mapboxSdk from "@mapbox/mapbox-sdk"
-// 
-// const mapboxClient = mapboxSdk({ accessToken: mapboxgl.accessToken })
 
 import { BsApple } from "react-icons/bs"
 import { SiWaze } from "react-icons/si"
@@ -34,16 +30,11 @@ function Map({ street, city, country }) {
 
 
   useEffect(() => {
-
     const getAddressCoordinates = async () => {
       try {
         const query = encodeURIComponent(street + " " + city + " " + country)
         const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?access_token=${mapboxgl.accessToken}`)
-
         const data = await response.json();
-
-        console.log(query);
-        console.log(data.features[0])
 
         setLocation([...data.features[0].center])
 
@@ -69,62 +60,7 @@ function Map({ street, city, country }) {
     } else {
       setInit(true)
     }
-
-
   }, [location])
-
-
-  // const fetchData = useCallback(() => {
-  //   const geocodingClient = mbxGeocoding({
-  //     accessToken: mapboxgl.accessToken,
-  //   })
-
-  //   return geocodingClient
-  //     .forwardGeocode({
-  //       query: `${street}, ${city}, ${country}`,
-  //       autocomplete: false,
-  //       limit: 1
-  //     })
-  //     .send()
-  //     .then((response) => {
-  //       if (
-  //         !response ||
-  //         !response.body ||
-  //         !response.body.features ||
-  //         !response.body.features.length
-  //       ) {
-  //         console.error('Invalid response:')
-  //         console.error(response)
-  //         return;
-  //       }
-  //       const feature = response.body.features[0]
-
-  //       console.log(feature)
-
-  //       return feature
-  //     });
-
-  // }, [])
-
-  // useEffect(() => {
-  //   if (map.current) return;
-
-  //   const results = fetchData()
-
-  //   results.then((marker) => {
-  //     map.current = new mapboxgl.Map({
-  //       container: mapContainerRef.current,
-  //       style: 'mapbox://styles/mapbox/streets-v11',
-  //       zoom: 20,
-  //       center: marker.center,
-  //     })
-
-  //     new mapboxgl.Marker().setLngLat(marker.center).addTo(map.current)
-  //   })
-
-  //   //return () => map.current.remove()
-
-  // }, [fetchData])
 
   return (
     <div>

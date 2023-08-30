@@ -15,8 +15,8 @@ export const MinimalButton = styled.button`
 `
 
 export const MainButton = styled.button`
-  background: #695BD7;
-  color: #fff;
+  background: var(--color-primary);
+  color: var(--color-lightPrimary);
   border-radius: 30px;
   text-transform: uppercase;
   font-weight: 700;

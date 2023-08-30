@@ -7,7 +7,7 @@ import Form from '../components/Form'
 import Download from '../components/Download';
 
 const Container = styled.header`
-  background: #fff;
+  background: var(--color-lightPrimary);
   padding: 70px;
   border-radius: 20px;
   display: grid;
@@ -57,7 +57,7 @@ function Header() {
     <Container>
       <Intro>
         <Title>Digital QR<br />Business<br />Cards</Title>
-        <Subtitle>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias quis perferendis reiciendis</Subtitle>
+        <Subtitle>Ditch the paper clutter and effortlessly share your contact information via QR codes. Your business card, reimagined for the digital era.</Subtitle>
       </Intro>
       <Download profile={profile} profileSubmitted={profileSubmitted} />
       <Form />

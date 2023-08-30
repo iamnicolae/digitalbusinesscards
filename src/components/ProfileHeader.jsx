@@ -22,8 +22,8 @@ const Avatar = styled.div`
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  border: 5px solid white;
-  background: white;
+  border: 5px solid var(--color-lightPrimary);
+  background: var(--color-lightPrimary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -52,8 +52,8 @@ const Links = styled.div`
   a {
     font-weight: 700;
     font-size: 1.4rem;
-    background: white;
-    color: #4d4d4d;
+    background: var(--color-lightPrimary);
+    color: var(--color-darkTertiary);
     padding: 5px 7px;
     border-radius: 20px;
     display: flex;

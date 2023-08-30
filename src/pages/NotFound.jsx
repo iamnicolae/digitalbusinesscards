@@ -2,7 +2,7 @@ import { styled } from 'styled-components'
 import { Background, Container } from '../styles/template'
 
 const Title = styled.h1`
-  color: white;
+  color: var(--color-lightPrimary);
   font-size: 3rem;
 `
 
