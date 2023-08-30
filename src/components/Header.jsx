@@ -16,7 +16,7 @@ const Container = styled.header`
   grid-column-gap: 50px;
   grid-row-gap: 60px;
 
-  @media only screen and (max-width: 750px) {
+  @media only screen and (max-width: 1115px) {
     padding: 30px;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(3, auto);
@@ -28,7 +28,11 @@ const Title = styled.h1`
   font-size: 8rem;
   text-transform: uppercase;
 
-  @media only screen and (max-width: 1350px) {
+  @media only screen and (max-width: 1320px) {
+    font-size: 6.5rem;
+  }
+
+  @media only screen and (max-width: 1024px) {
     font-size: 5.5rem;
   }
 `
@@ -41,7 +45,7 @@ const Subtitle = styled.p`
 const Intro = styled.div`
   grid-area: 1 / 1 / 2 / 2;
 
-  @media only screen and (max-width: 750px) {
+  @media only screen and (max-width: 1115) {
     grid-area: 1 / 1 / 2 / 2;
   }
 `

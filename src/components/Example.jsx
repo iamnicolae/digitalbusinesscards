@@ -8,7 +8,11 @@ const Container = styled.div`
   text-align: center;
   position: relative;
 
-  @media only screen and (max-width: 750px) {
+  @media only screen and (max-width: 1320px) {
+    padding: 50px;
+  }
+
+  @media only screen and (max-width: 1024px) {
     padding: 30px;
   }
 `

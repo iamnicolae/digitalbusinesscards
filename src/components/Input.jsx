@@ -3,10 +3,9 @@ import { styled, css } from "styled-components"
 const InputWrap = styled.div`
   margin: 10px 0;
   
-  ${props => props.name == 'email' && css`
+  @media only screen and (max-width: 750px) {
     width: 100%;
-    display: block;
-  `}
+  }
 `
 
 const InputContainer = styled.input`

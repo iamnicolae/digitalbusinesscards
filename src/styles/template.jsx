@@ -22,7 +22,7 @@ export const Container = styled.section`
   flex-direction: column;
   gap: 50px;
   
-  @media only screen and (max-width: 750px) {
+  @media only screen and (max-width: 1320px) {
     width: 95%;
   }
 `

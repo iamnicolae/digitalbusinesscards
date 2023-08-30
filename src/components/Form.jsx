@@ -23,7 +23,7 @@ const FormContainer = styled.form`
   position: relative;
   grid-area: 1 / 2 / 3 / 3;
 
-  @media only screen and (max-width: 750px) {
+  @media only screen and (max-width: 1115px) {
     grid-area: 2 / 1 / 3 / 2;
   }
 `
@@ -56,6 +56,8 @@ const InputWrap = styled.div`
   gap: 10px;
 
   @media only screen and (max-width: 750px) {
+   
+
     ${props => props.$email && css`
     display: block;
   `}

@@ -11,7 +11,7 @@ const Examples = styled.section`
   justify-content: space-between;
   gap: 50px;
 
-  @media only screen and (max-width: 1350px) {
+  @media only screen and (max-width: 1024px) {
     flex-direction: column;
   }
 `

@@ -38,6 +38,10 @@ const Avatar = styled.div`
 const Name = styled.h1`
   font-size: 3.2rem;
   text-align: center;
+
+  @media only screen and (max-width: 750px) {
+    font-size: 2.7rem;
+  }
 `
 
 const Links = styled.div`

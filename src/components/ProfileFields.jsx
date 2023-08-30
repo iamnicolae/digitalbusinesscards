@@ -44,6 +44,10 @@ const Label = styled.span`
 
 const Info = styled.span`
   font-size: 2rem;
+
+  @media only screen and (max-width: 750px) {
+    font-size: 1.7rem;
+  }
 `
 
 const MapField = styled(Field)`

@@ -6,10 +6,11 @@ export const MinimalButton = styled.button`
   align-items: center;
   gap: 5px;
   padding: 0;
+  font-size: 1.4rem;
   
   span {
-    font-size: 1.4rem;
     font-weight: 700;
+    text-align: left;
   }
 `
 

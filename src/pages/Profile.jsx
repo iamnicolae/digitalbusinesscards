@@ -26,6 +26,10 @@ const Container = styled.section`
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  @media only screen and (max-width: 750px) {
+    width: 95%;
+  }
 `
 
 function Profile() {

@@ -36,7 +36,7 @@ const Container = styled.div`
     display: block;
   }
 
-  @media only screen and (max-width: 750px) {
+  @media only screen and (max-width: 1115px) {
     grid-area: 3 / 1 / 4 / 2;
     flex-direction: column;
   }

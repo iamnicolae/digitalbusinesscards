@@ -1,4 +1,3 @@
-import { styled } from 'styled-components'
 import { Background, Container, Section } from '../styles/template'
 
 function Pro() {
