@@ -3,7 +3,7 @@ import { styled } from "styled-components"
 
 import { db } from "../firebase/config"
 import { storage } from "../firebase/config"
-import { collection, addDoc } from "firebase/firestore"
+import { collection, addDoc, updateDoc, doc } from "firebase/firestore"
 import { ref, uploadBytes } from "firebase/storage"
 
 import generateUniqueId from "../utils/generateUniqueId"
@@ -31,6 +31,8 @@ function Form() {
 
   const [validation, setValidation] = useState({})
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [profileId, setProfileId] = useState(null)
+  const [fileName, setFileName] = useState(null)
   const profilesCollection = collection(db, "profiles")
 
   const validate = (e) => {
@@ -45,21 +47,43 @@ function Form() {
     const errors = validateForm(profile)
 
     if (Object.keys(errors).length === 0) {
-      const { avatarImage, avatar, ...profileData } = profile;
+      if (profileId) {
+        const { avatarImage, avatar, slug, created_at, ...updatedProfile } = profile
+        const profileDoc = doc(db, "profiles", profileId)
 
-      if (avatarImage === null) {
-        await addDoc(profilesCollection, { ...profileData, avatar: "" })
-        setProfileSubmitted(true)
-        setIsSubmitting(false)
+        if (avatarImage === null) {
+          await updateDoc(profileDoc, updatedProfile)
+          setIsSubmitting(false)
+        } else {
+          const avatarFilename = fileName ? fileName : `${generateUniqueId("image", 20)()}.${getFileExtension(avatarImage)}`
+          setFileName(avatarFilename)
+          const image = ref(storage, `avatars/${avatarFilename}`)
+          uploadBytes(image, avatarImage).then(async () => {
+            await updateDoc(profileDoc, { updatedProfile, avatar: avatarFilename })
+            setIsSubmitting(false)
+            alert("Avatar image uploaded.")
+          })
+        }
+
       } else {
-        const avatarFilename = `${generateUniqueId("image", 20)()}.${getFileExtension(avatarImage)}`
-        const image = ref(storage, `avatars/${avatarFilename}`)
-        uploadBytes(image, avatarImage).then(async () => {
-          await addDoc(profilesCollection, { ...profileData, avatar: avatarFilename })
+        const { avatarImage, avatar, ...profileData } = profile;
+
+        if (avatarImage === null) {
+          const profile = await addDoc(profilesCollection, { ...profileData, avatar: "" })
+          setProfileId(profile.id)
           setProfileSubmitted(true)
           setIsSubmitting(false)
-          alert("Avatar image uploaded.")
-        })
+        } else {
+          const avatarFilename = `${generateUniqueId("image", 20)()}.${getFileExtension(avatarImage)}`
+          setFileName(avatarFilename)
+          const image = ref(storage, `avatars/${avatarFilename}`)
+          uploadBytes(image, avatarImage).then(async () => {
+            await addDoc(profilesCollection, { ...profileData, avatar: avatarFilename })
+            setProfileSubmitted(true)
+            setIsSubmitting(false)
+            alert("Avatar image uploaded.")
+          })
+        }
       }
 
     } else {
