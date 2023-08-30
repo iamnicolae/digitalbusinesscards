@@ -55,7 +55,7 @@ function Download({ profile, profileSubmitted }) {
   let deferredPrompt;
 
   window.addEventListener('beforeinstallprompt', (e) => {
-    //e.preventDefault();
+    e.preventDefault();
     deferredPrompt = e;
   });
 
