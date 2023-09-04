@@ -77,7 +77,7 @@ function Download({ profile, profileSubmitted }) {
       deferredPrompt.prompt();
       const { outcome } = await deferredPrompt.userChoice;
       if (outcome === 'accepted') {
-        deferredPrompt = null;
+        setDeferredPrompt(null);
       }
     }
   }
