@@ -33,11 +33,9 @@ function Map({ street, city, country }) {
     const getAddressCoordinates = async () => {
       try {
         const query = encodeURIComponent(street + " " + city + " " + country)
-        //console.log(street, city, country)
-        //const query = encodeURIComponent(street)
         const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?access_token=${mapboxgl.accessToken}`)
         const data = await response.json();
-        //console.log(data)
+
         setLocation([...data.features[0].center])
 
       } catch (error) {
