@@ -25,7 +25,7 @@ const Field = styled.div`
   padding: 20px;
   border-radius: 20px;
   box-shadow: rgba(10, 11, 13, 0.025) 0px 1px 2px 0px;
-  ${props => props.$relative ? "position: relative" : ""};
+  ${props => props.$relative ? `position: relative` : ``};
 `
 
 const Label = styled.span`
@@ -55,14 +55,14 @@ const MapField = styled(Field)`
     height: 635px;
     padding: 20px;
     margin-top: 0;
-    overflow: visible;
-  ` : `
-    height: 0;
+    overflow: visible;`
+    :
+    `height: 0;
     padding: 0;
     margin-top: -20px;
-    overflow: hidden;
-  `};
-`;
+    overflow: hidden;`
+  }
+`
 
 const ShowMapButton = styled.button`
   background: none;
@@ -120,7 +120,7 @@ function ProfileFields({ user, userAvatar }) {
       </Field>}
 
       <MapField $display={showMap}>
-        <Map street="267 5th Avenue" city="New York City" country="United States" />
+        <Map street={user.street} city={user.street} country={user.country} />
       </MapField>
 
       {user.website && <Field>
