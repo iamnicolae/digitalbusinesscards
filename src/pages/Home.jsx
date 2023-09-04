@@ -28,7 +28,7 @@ function Home() {
             avatar="evangelina-cabrera.jpg"
             company="Pink Paper"
             position="Chief Editor"
-            profile="http://localhost:5173/mwjwvc8"
+            profile="https://getqr.cc/q546r62"
           />
           <Example
             id={2}
@@ -36,7 +36,7 @@ function Home() {
             avatar="wilford-horne.jpg"
             company="Yellllow"
             position="UX Designer"
-            profile="http://localhost:5173/mwjwvc8"
+            profile="https://getqr.cc/dgjl9tf"
           />
           <Example
             id={3}
@@ -44,7 +44,7 @@ function Home() {
             avatar="julius-kopp.jpg"
             company="Bluesky Logistics"
             position="Logistics Analyst"
-            profile="http://localhost:5173/mwjwvc8"
+            profile="https://getqr.cc/tdzywqb"
           />
         </Examples>
         <Footer />
