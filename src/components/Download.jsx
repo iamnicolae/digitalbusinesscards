@@ -65,7 +65,7 @@ function Download({ profile, profileSubmitted }) {
   }, [])
 
   return (
-    <Container $profileSubmitted={true}>
+    <Container $profileSubmitted={profileSubmitted}>
       <QR slug={profile.slug} />
       <Actions>
         <MinimalButton onClick={generatePDF}><GrDocumentPdf /> <span>Download QR code as PDF</span></MinimalButton>

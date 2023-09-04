@@ -22,6 +22,7 @@ const Avatar = styled.div`
   width: 100px;
   height: 100px;
   border-radius: 50%;
+  overflow: hidden;
   border: 5px solid var(--color-lightPrimary);
   background: var(--color-lightPrimary);
   display: flex;
