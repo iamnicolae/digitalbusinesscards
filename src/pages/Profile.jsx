@@ -30,7 +30,7 @@ const Container = styled.section`
 
 function Profile() {
   const { slug } = useParams()
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const [user, setUser] = useState({})
   const [userAvatar, setUserAvatar] = useState("")
   const navigate = useNavigate();
@@ -41,7 +41,7 @@ function Profile() {
 
       const querySnapshot = await getDocs(q);
 
-      console.log(querySnapshot.empty)//reedirect to some upsell page
+      // console.log(querySnapshot.empty)//reedirect to some upsell page
 
       if (querySnapshot.empty) {
         navigate('/notfound', { replace: true })
@@ -49,10 +49,10 @@ function Profile() {
 
       querySnapshot.forEach((doc) => {//only one doc
         // doc.data() is never undefined for query doc snapshots
-        console.log(doc)
-        console.log(doc.id, " => ", doc.data());
+        //console.log(doc)
+        //console.log(doc.id, " => ", doc.data());
         setUser(doc.data())
-        //setIsLoading(false)
+        setIsLoading(false)
       });
     }
 

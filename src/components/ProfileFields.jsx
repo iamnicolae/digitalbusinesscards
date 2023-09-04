@@ -120,7 +120,7 @@ function ProfileFields({ user, userAvatar }) {
       </Field>}
 
       <MapField $display={showMap}>
-        <Map street={user.street} city={user.street} country={user.country} />
+        <Map street={user.street} city={user.city} country={user.country} />
       </MapField>
 
       {user.website && <Field>
