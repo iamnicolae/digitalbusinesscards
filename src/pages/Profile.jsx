@@ -38,19 +38,13 @@ function Profile() {
   useEffect(() => {
     const getUser = async () => {
       const q = query(collection(db, "profiles"), where("slug", "==", slug))
-
       const querySnapshot = await getDocs(q);
-
-      // console.log(querySnapshot.empty)//reedirect to some upsell page
 
       if (querySnapshot.empty) {
         navigate('/notfound', { replace: true })
       }
 
-      querySnapshot.forEach((doc) => {//only one doc
-        // doc.data() is never undefined for query doc snapshots
-        //console.log(doc)
-        //console.log(doc.id, " => ", doc.data());
+      querySnapshot.forEach((doc) => {
         setUser(doc.data())
         setIsLoading(false)
       });

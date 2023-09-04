@@ -72,7 +72,7 @@ function Footer() {
   return (
     <Container>
       <LogoContainer>
-        <Logo src="/assets/getqr-logo-light.png" alt="" />
+        <Logo src="/assets/getqr-logo-light.png" alt="GetQR" />
         <Copyright>&copy;{new Date().getFullYear()} <Notice>This website uses cookies</Notice></Copyright>
       </LogoContainer>
       <MenuContainer>
