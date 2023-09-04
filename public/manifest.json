@@ -1,12 +1,12 @@
 {
-  "name": "My PWA",
-  "short_name": "VV",
+  "name": "GetQR",
+  "short_name": "GetQR",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
-  "background_color": "#5d54a4",
-  "theme_color": "#5d54a4",
-  "description": "Curs valutar banci Romania. Vezi cursul de schimb valutar de la casele de schimb a celor mai importante banci din Romania. Cursul este actualizat la 10 minute.",
+  "background_color": "#695BD7",
+  "theme_color": "#695BD7",
+  "description": "GetQR is a digital QR business cards generator that helps you streamline your contact sharing and networking experience effortlessly. Create and exchange digital QR business cards with a simple scan.",
   "icons": [
     {
       "src": "/assets/icon_192.png",

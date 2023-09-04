@@ -14,7 +14,7 @@ const Container = styled.header`
   grid-template-columns: repeat(2, auto);
   grid-template-rows: repeat(2, auto);
   grid-column-gap: 50px;
-  grid-row-gap: 60px;
+  grid-row-gap: 50px;
 
   @media only screen and (max-width: 1115px) {
     padding: 30px;
@@ -39,7 +39,7 @@ const Title = styled.h1`
 
 const Subtitle = styled.p`
   font-size: 2.2rem;
-  margin-top: 10px;
+  margin-top: 30px;
 `
 
 const Intro = styled.div`
@@ -57,7 +57,7 @@ function Header() {
     <Container>
       <Intro>
         <Title>Digital QR<br />Business<br />Cards</Title>
-        <Subtitle>Ditch the paper clutter and effortlessly share your contact information via QR codes. Your business card, reimagined for the digital era.</Subtitle>
+        <Subtitle>Ditch the paper clutter and effortlessly share your contact information via QR codes</Subtitle>
       </Intro>
       <Download profile={profile} profileSubmitted={profileSubmitted} />
       <Form />
