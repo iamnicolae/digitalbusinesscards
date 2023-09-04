@@ -7,6 +7,7 @@ import { MinimalButton } from '../styles/button'
 
 import generatePDF from '../utils/generatePDF'
 import generatePNG from '../utils/generatePNG'
+import installAsApp from '../utils/installAsApp'
 import QR from './QR'
 
 import { useEffect, useState } from 'react'
@@ -56,31 +57,12 @@ function Download({ profile, profileSubmitted }) {
 
   const [deferredPrompt, setDeferredPrompt] = useState(null)
 
-
   useEffect(() => {
     window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      setDeferredPrompt(e);
+      e.preventDefault()
+      setDeferredPrompt(e)
     });
   }, [])
-
-  // window.addEventListener('beforeinstallprompt', (e) => {
-  //   e.preventDefault();
-  //   deferredPrompt = e;
-  // });
-
-  const showInstallButton = async () => {
-
-    //deferredPrompt.prompt();
-
-    if (deferredPrompt !== null) {
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      if (outcome === 'accepted') {
-        setDeferredPrompt(null);
-      }
-    }
-  }
 
   return (
     <Container $profileSubmitted={true}>
@@ -88,7 +70,7 @@ function Download({ profile, profileSubmitted }) {
       <Actions>
         <MinimalButton onClick={generatePDF}><GrDocumentPdf /> <span>Download QR code as PDF</span></MinimalButton>
         <MinimalButton onClick={generatePNG}><GrDocumentImage /> <span>Download QR code as PNG</span></MinimalButton>
-        <MinimalButton onClick={showInstallButton}><MdAddToHomeScreen /> <span>Add QR code to home screen</span></MinimalButton>
+        <MinimalButton onClick={() => installAsApp(deferredPrompt, setDeferredPrompt)}><MdAddToHomeScreen /> <span>Add QR code to home screen</span></MinimalButton>
       </Actions>
     </Container>
   )
