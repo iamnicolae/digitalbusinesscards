@@ -4,7 +4,7 @@
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
-  "background_color": "#695BD7",
+  "background_color": "#fff",
   "theme_color": "#695BD7",
   "description": "GetQR is a digital QR business cards generator that helps you streamline your contact sharing and networking experience effortlessly. Create and exchange digital QR business cards with a simple scan.",
   "icons": [
